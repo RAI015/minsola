@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+      memo:
+        title: タイトル
+        body: 本文
+  views:
+    pagination:
+      first: 最初
+      last: 最後
+      previous: 前
+      next: 次
+      truncate: ...
+  devise:
+    sessions:
+      signed_in: ''
+      signed_out: ''
