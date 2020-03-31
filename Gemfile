@@ -73,6 +73,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # ----- 以下追加 -----
 gem 'devise'
+# gem 'devise-i18n'
+# gem 'devise-i18n-views'
 gem 'kaminari'
 gem 'rails-i18n'
 gem 'fog-aws'
