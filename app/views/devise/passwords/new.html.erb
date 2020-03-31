@@ -1,0 +1,20 @@
+<% provide :title, 'パスワード再設定' %>
+
+<div class="container user_form">
+  <%= render "devise/shared/notice_alert" %>
+  <h2 class="form_title">パスワードを再設定する</h2>
+  <p class="explanation mx-auto text-justify">
+    パスワードを忘れた場合は、以下のフォームに登録したメールアドレスを入力してください。<br>パスワードの再設定について、メールでご連絡差し上げます。
+  </p>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :email, 'メールアドレス' %>
+      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: 'required' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit '再設定用のメールを送信する', class: 'btn btn-primary user_form_btn' %>
+    </div>
+  <% end %>
+</div>

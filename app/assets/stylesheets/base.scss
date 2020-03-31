@@ -1,0 +1,46 @@
+/* body */
+body {
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+/* header */
+.navbar {
+  border-radius: 0px;
+}
+
+/* main */
+main {
+  flex: 1;
+}
+
+/* footer */
+footer {
+  background: #272727;
+  color: #fff;
+  text-align: center;
+  p {
+    padding: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+/* UserForm */
+.devise_notice_alert {
+  // text-align: left;
+  padding-top: 30px;
+}
+
+.user_form {
+  max-width: 440px;
+}
+
+.form_title {
+  margin-bottom: 20px;
+}
+
+.user_form_btn {
+  margin-bottom: 10px;
+}
