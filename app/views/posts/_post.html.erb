@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="card card-post">
+    <div class="card-header">
+      <ul class="card-info list-inline">
+        <li class="list-inline-item"><%= post.user.name + 'さん ' + post.created_at.to_s(:datetime_jp) + 'に投稿' %></li>
+        <% if user_signed_in? && current_user.id == post.user.id %>
+          <li class="list-inline-item float-right"><%= link_to '削除', @post, method: :delete, data: { confirm: '削除してもよろしいですか？' }, class:'btn btn-outline-dark' %></li>
+          <li class="list-inline-item float-right mr-2"><%= link_to '編集', edit_post_path(@post), class:'btn btn-outline-dark' %></li>
+        <% end %>
+      </ul>
+      <h4><%= post.title %></h4>
+      <%= image_tag "weather01.jpg", alt: "天気の画像", id: "pic1", class: "weather_image" %>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><%= simple_format(post.body) %></p>
+    </div>
+  </div>
+</div>
