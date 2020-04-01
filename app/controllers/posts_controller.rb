@@ -28,7 +28,9 @@ class PostsController < ApplicationController
     redirect_to root_path, flash: { success: "「#{@post.title}」の記事が削除されました" }
   end
 
-  def show; end
+  def show
+    @comment = Comment.new(post_id: @post.id)
+  end
 
   def edit; end
 
