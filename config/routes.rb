@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  resources :users, only: %i[show edit update]
+  resources :posts
 
+  resources :users, only: %i[show edit update]
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',

@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-  <a class="navbar-brand" href="">Fitter</a>
+  <%= image_tag 'logo_sun01.png', class: 'navbar-logo' %>
+  <a class="navbar-brand" href="/">Every-Weather</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -11,7 +12,7 @@
         <%= header_link_item(icon('fas', 'th') + ' 投稿一覧', root_path) %>
       </li>
       <li class="nav-item">
-        <%= header_link_item(icon('fas', 'plus-circle') + ' 新規投稿', '#') %>
+        <%= header_link_item(icon('fas', 'edit') + ' 新規投稿', new_post_path) %>
       </li>
       <li class="nav-item">
         <!-- <%= link_to icon('fas', 'user-plus') + " #{current_user.name}さん", '', class: 'nav-link dropdown-toggle' %> -->
@@ -31,8 +32,8 @@
     <% end %>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control mr-sm-2" type="search" placeholder="キーワードで検索" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
     </form>
   </div>
 </nav>
