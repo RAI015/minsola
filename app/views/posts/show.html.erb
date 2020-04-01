@@ -1,17 +1,19 @@
 <% provide :title, @post.title %>
 
+<% if flash[:success] %>
+  <div class="alert alert-primary"><%= flash[:success] %></div>
+<% end %>
+
 <div class="d-flex align-items-center mt-4 mb-4">
   <div class="ml-auto posts__linkBox">
   </div>
 </div>
 
-<% if flash[:success] %>
-  <div class="alert alert-primary"><%= flash[:success] %></div>
-<% end %>
-
 <%= render @post %>
-
-<div class="p-comment__list">
-  <div class="p-comment_listTitle">コメント</div>
-  <!--  render @post.comments -->
-</div>
+<%= render partial: 'comments/form', locals: { comment: @comment } %>
+<% if @post.comments.count > 0 %>
+  <div class="p-comment__list">
+    <div class="p-comment_listTitle">コメント</div>
+    <%= render @post.comments %>
+  </div>
+<% end %>
