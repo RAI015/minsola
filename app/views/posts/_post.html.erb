@@ -9,7 +9,7 @@
         <% end %>
       </ul>
       <h4><%= post.title %></h4>
-      <%= image_tag "weather01.jpg", alt: "天気の画像", id: "pic1", class: "weather_image" %>
+      <%= image_tag(post.image.to_s, class: 'weather_image', alt: 'Weather image') %>
     </div>
     <div class="card-body">
       <p class="card-text"><%= simple_format(post.body) %></p>

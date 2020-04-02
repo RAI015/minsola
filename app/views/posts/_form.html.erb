@@ -10,11 +10,20 @@
       <%= f.label :body, '本文' %>
       <%= f.text_area :body, class: 'form-control', rows: 10 %>
     </div>
-    <!-- <div class="form-group">
-      <%= f.label :picture, '画像ファイル' %>
-      <%= f.file_field :picture, accept: 'image/jpg,image/jpeg,image/gif,image/png' %>
-    </div> -->
+    <div class="form-group">
+      <%= f.label :image, '画像ファイル' %>
+      <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+    </div>
 
     <%= submit_tag '登録', class: 'btn btn-primary' %>
   <% end %>
 </div>
+
+<script type="text/javascript">
+$('#post_image').bind('change', function() {
+  var size_in_megabytes = this.files[0].size/1024/1024;
+  if (size_in_megabytes > 5) {
+    alert('ファイルサイズは5MB以下にしてください。');
+  }
+});
+</script>

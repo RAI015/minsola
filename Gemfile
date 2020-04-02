@@ -38,6 +38,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # ----- 以下追加 -----
+  gem 'faker', '~> 2.8'
   gem 'rspec-rails', '~> 4.0.0.beta'
 end
 
@@ -65,7 +66,6 @@ group :test do
   gem 'chromedriver-helper'
 
   # ----- 以下追加 -----
-  gem 'faker', '~> 2.8'
   gem 'rspec_junit_formatter'
 end
 
