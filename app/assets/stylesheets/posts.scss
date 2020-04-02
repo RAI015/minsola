@@ -1,3 +1,13 @@
+.post-cards {
+  gap: 20px;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+.card-index {
+  height: 360px;
+  margin: 10px 0;
+}
+
 .weather_image {
   width: 500px;
   max-width: 100%;
@@ -12,4 +22,10 @@
   a {
     // display: block;
   }
+}
+
+.card-body p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

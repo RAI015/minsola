@@ -28,3 +28,6 @@
 
 # Ignore DS_Store
 /.DS_Store
+
+# Ignore uploaded Images
+/public/uploads
