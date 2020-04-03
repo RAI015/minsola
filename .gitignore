@@ -28,6 +28,7 @@
 
 # Ignore DS_Store
 /.DS_Store
+/app/.DS_Store
 
 # Ignore uploaded Images
 /public/uploads
