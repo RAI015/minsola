@@ -40,6 +40,7 @@ group :development, :test do
   # ----- 以下追加 -----
   gem 'faker', '~> 2.8'
   gem 'rspec-rails', '~> 4.0.0.beta'
+  gem 'factory_bot_rails', '~> 4.10.0'
 end
 
 group :development do
@@ -56,6 +57,7 @@ group :development do
   gem 'rails-flog', require: 'flog'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
+  gem 'spring-commands-rspec'
 end
 
 group :test do

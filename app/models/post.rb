@@ -23,7 +23,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   mount_uploader :image, ImageUploader
-  validates :title, presence: true, length: { maximum: 40 }
+  validates :title, presence: true, length: { maximum: 30 }
   validates :body, presence: true, length: { maximum: 500 }
   validate :image_size
 

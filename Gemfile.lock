@@ -107,6 +107,11 @@ GEM
     erubi (1.9.0)
     excon (0.73.0)
     execjs (2.7.0)
+    factory_bot (4.10.0)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.10.0)
+      factory_bot (~> 4.10.0)
+      railties (>= 3.0.0)
     faker (2.11.0)
       i18n (>= 1.6, < 2)
     ffi (1.12.2)
@@ -299,6 +304,8 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     spring (2.1.0)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
@@ -348,6 +355,7 @@ DEPENDENCIES
   devise
   devise-i18n
   devise-i18n-views
+  factory_bot_rails (~> 4.10.0)
   faker (~> 2.8)
   fog-aws
   font-awesome-sass (~> 5.4.1)
@@ -369,6 +377,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
+  spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
