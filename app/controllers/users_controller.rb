@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_target_user
 
   def show
+    
   end
 
   def edit

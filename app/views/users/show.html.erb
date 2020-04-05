@@ -5,14 +5,16 @@
 
     <h1>マイページ</h1>
     <div class="d-none d-md-block pr-5">
-      <% if current_user.avatar? %>
-        <%= image_tag(current_user.avatar.url, size: "250x250", class: "rounded-circle z-depth-0 avatar-image", alt: "avatar image") %>
+      <% if @user.avatar? %>
+        <%= image_tag(@user.avatar.url, size: "250x250", class: "rounded-circle z-depth-0 avatar-image", alt: "avatar image") %>
       <% else %>
         <%= image_tag("no-avatar.png", size: "250x250", class: "rounded-circle z-depth-0 avatar-image", alt: "avatar image") %>
       <% end %>
     </div>
-    <p><%= current_user.name %></p>
-    <p><%= current_user.email %></p>
-    <%= link_to '編集', edit_user_path(current_user), class:'btn btn-outline-dark' %>
+    <p><%= @user.name %></p>
+    <p><%= @user.email %></p>
+    <% if user_signed_in? && current_user.id == @user.id %>
+      <%= link_to '編集', edit_user_path(current_user), class:'btn btn-outline-dark' %>
+    <% end %>
   </div>
 </div>

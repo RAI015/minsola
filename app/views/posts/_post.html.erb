@@ -1,18 +1,41 @@
-<div class="container">
-  <div class="card card-post">
-    <div class="card-header">
-      <ul class="card-info list-inline">
-        <li class="list-inline-item"><%= post.user.name + 'さん ' + post.created_at.to_s(:datetime_jp) + 'に投稿' %></li>
+<div class="card">
+  <div class="card-header">
+    <div class="post-user">
+      <%= link_to image_tag(post.user.avatar.to_s, class: 'user_avatar'), post.user, class: 'mr-2' %>
+      <%= link_to post.user.name, post.user %>
+    </div>
+    <div class="post-info">
+      <%= post.title %><br>
+      <small><%= post.created_at.to_s(:datetime_jp) %></small>
+    </div>
+  </div>
+  <div class="card-body">
+    <%= image_tag(post.image.to_s, class: 'weather_image_post', alt: 'Weather image') %>
+  </div>
+  <div class="card-footer">
+    <%= simple_format(post.body) %>
+    <table class="post-table">
+      <tr>
+        <th>天気</th>
+        <td>快晴</td>
+      </tr>
+      <tr>
+        <th>体感</th>
+        <td>あたたかい</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+
+      <ul class="list-inline" style="margin-bottom: 0px;">
+        <li class="list-inline-item">
+          <%= link_to image_tag(post.user.avatar.to_s, class: 'user_avatar'), post.user, class: 'mr-2' %>
+          <%= link_to post.user.name, post.user %>
+        </li>
         <% if user_signed_in? && current_user.id == post.user.id %>
           <li class="list-inline-item float-right"><%= link_to '削除', @post, method: :delete, data: { confirm: '投稿を削除してもよろしいですか？' }, class:'btn btn-outline-dark' %></li>
           <li class="list-inline-item float-right mr-2"><%= link_to '編集', edit_post_path(@post), class:'btn btn-outline-dark' %></li>
         <% end %>
       </ul>
-      <h4><%= post.title %></h4>
-      <%= image_tag(post.image.to_s, class: 'weather_image', alt: 'Weather image') %>
-    </div>
-    <div class="card-body">
-      <p class="card-text"><%= simple_format(post.body) %></p>
-    </div>
-  </div>
-</div>
