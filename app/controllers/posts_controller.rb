@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   end
 
   def set_form_title
-    @form_title = params['action'] == 'new' ? '新しい投稿' : '編集'
+    @form_title = params['action'] == 'new' ? '新しい投稿' : '投稿を編集'
     # new: 新しい投稿
     # edit: 編集
   end

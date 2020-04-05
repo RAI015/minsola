@@ -9,11 +9,19 @@
   </div>
 </div>
 
-<%= render @post %>
-<%= render partial: 'comments/form', locals: { comment: @comment } %>
-<% if @post.comments.count > 0 %>
-  <div class="p-comment__list">
-    <div class="p-comment_listTitle">コメント</div>
-    <%= render @post.comments %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <%= render @post %>
+    </div>
+    <div class="col-md-6">
+      <%= render partial: 'comments/form', locals: { comment: @comment } %>
+      <% if @post.comments.count > 0 %>
+        <div class="p-comment__list">
+          <div class="p-comment_listTitle">コメント</div>
+          <%= render @post.comments %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

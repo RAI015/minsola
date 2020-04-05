@@ -1,5 +1,6 @@
 .p-comment__formBox {
-  margin: 30px auto;
+  // margin: 30px auto;
+  margin: 0 auto 30px auto;
   border: 5px solid #e8e8e8;
   padding: 25px;
   border-radius: 14px;
@@ -16,7 +17,8 @@
 }
 
 .p-comment__list {
-  margin: 38px 0;
+  // margin: 38px 0;
+  margin: 0 auto 30px auto;
   padding: 20px;
 }
 
@@ -31,6 +33,9 @@
 
   > span {
     font-size: 14px;
-    margin: 0 12px;
+    margin: 0 5px;
+    > a {
+      color: #777;
+    }
   }
 }

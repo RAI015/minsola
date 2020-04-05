@@ -9,11 +9,17 @@
     <% @posts.each do |post| %>
       <div class="col-sm-4">
         <div class="card card-index">
-          <%= link_to image_tag(post.image.to_s, class: 'weather_image', alt: 'Weather image'), post %>
-          <div class="card-body">
-            <h5 class="card-title"><%= post.title %></h5>
-            <p class="card-text"><%= simple_format(post.body) %></p>
+          <div class="card-header" >
+            <div class="post-user">
+              <%= link_to image_tag(post.user.avatar.to_s, class: 'user_avatar'), post.user, class: 'mr-2' %>
+              <%= link_to post.user.name, post.user %>
+            </div>
+            <div class="post-info">
+              <small><%= post.title %></small><br>
+              <small><%= post.created_at.to_s(:datetime_jp) %></small>
+            </div>
           </div>
+          <%= link_to image_tag(post.image.to_s, class: 'weather_image_index', alt: 'Weather image'), post %>
         </div>
       </div>
     <% end %>

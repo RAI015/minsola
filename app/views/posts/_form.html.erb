@@ -2,6 +2,52 @@
   <%= render "shared/error_messages" %>
   <h2 class="form_title"><%= form_title %></h2>
   <%= form_with model: post do |f| %>
+    <div class="form-group row">
+      <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', class: 'custom-file-input' %>
+      <div class="col-sm-6 add_image text-center" id="img_field" onClick="$('#post_image').click()">
+        <% if post.image.url.present? %>
+          <%= image_tag(post.image.url) %>
+        <% else %>
+          <i class="fas fa-camera"><p class="help-block">※ 5MBまでの画像をアップロードできます</p></i>
+        <% end %>
+      </div>
+      <div class="col-sm-6">
+        <%= f.label :body, 'キャプション' %>
+        <%= f.text_area :body, class: 'form-control', rows: 12, placeholder: '説明を入力してください' %>
+      </div>
+    </div>
+    <div class='form-group row'>
+      <div class="col-sm-6">
+        <label for="basho">場所</label>
+        <input type="text" id="basho" class="form-control" placeholder="東京都渋谷区" >
+      </div>
+      <div class='col-sm-6'>
+        <label for="time">日時</label>
+        <input type="text" id="time" class="form-control" placeholder="Vue.jsでカレンダー?" >
+      </div>
+    </div>
+    <div class='form-group row'>
+      <div class="col-sm-6">
+        <label for="tenki">天気</label>
+        <input type="text" id="tenki" class="form-control" placeholder="快晴/晴れ/曇り/雨/雪(selectboxか)" >
+      </div>
+      <div class='col-sm-6'>
+        <label for="taikan">体感</label>
+        <input type="text" id="taikan" class="form-control" placeholder="あたたかい" >
+      </div>
+    </div>
+    <%= submit_tag '投稿する', class: 'btn btn-primary mt-3' %>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <div id="img_field2" onClick="$('#file').click()" >
+      <% if post.image.url.present? %>
+        <%= image_tag(post.image.url) %>
+      <% else %>
+        <i class="fas fa-image"></i><i class="fas fa-file-upload add"></i>
+      <% end %>
+    </div>
+    <%= f.file_field :image, class: "image", style: "display:none;", id: "file"%>
+
     <div class='form-group'>
       <%= f.label :title, 'タイトル' %>
       <%= f.text_field :title, class: 'form-control' %>
@@ -10,14 +56,22 @@
       <%= f.label :body, '本文' %>
       <%= f.text_area :body, class: 'form-control', rows: 10 %>
     </div>
-    <div class="form-group">
-      <%= f.label :image, '画像ファイル' %>
-      <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
-    </div>
-
-    <%= submit_tag '登録', class: 'btn btn-primary' %>
   <% end %>
 </div>
+
+
+
+      <div class="image-box col-sm-6 add_image text-center" id="img_field" onClick="$('#post_image').click()">
+        <label class="add_image text-center" for="post_image">
+          <% if post.image.url.present? %>
+            <%= image_tag(post.image.url) %>
+          <% else %>
+            <i class="fas fa-camera"><p class="help-block">※ 5MBまでの画像をアップロードできます</p></i>
+          <% end %>
+        </label>
+      </div>
+
+
 
 <script type="text/javascript">
 $('#post_image').bind('change', function() {
@@ -26,4 +80,69 @@ $('#post_image').bind('change', function() {
     alert('ファイルサイズは5MB以下にしてください。');
   }
 });
+
+
+
+$(function(){
+  $fileField = $('#post_image')
+
+  // 選択された画像を取得し表示
+  $($fileField).on('change', $fileField, function(e) {
+    file = e.target.files[0]
+    reader = new FileReader(),
+    $preview = $("#img_field");
+
+    reader.onload = (function(file) {
+      return function(e) {
+        $preview.empty();
+        $preview.append($('<img>').attr({
+          src: e.target.result,
+          // width: "100%",
+          class: "preview",
+          title: file.name
+        }));
+      };
+    })(file);
+    reader.readAsDataURL(file);
+  });
+});
+
+$(function(){
+  $fileField = $('#file')
+
+  // 選択された画像を取得し表示
+  $($fileField).on('change', $fileField, function(e) {
+    file = e.target.files[0]
+    reader = new FileReader(),
+    $preview = $("#img_field2");
+
+    reader.onload = (function(file) {
+      return function(e) {
+        $preview.empty();
+        $preview.append($('<img>').attr({
+          src: e.target.result,
+          width: "100%",
+          class: "preview",
+          title: file.name
+        }));
+      };
+    })(file);
+    reader.readAsDataURL(file);
+  });
+});
+
+// $(function() {
+//     function readURL(input) {
+//         if (input.files && input.files[0]) {
+//         var reader = new FileReader();
+//         reader.onload = function (e) {
+//     $('#img_prev').attr('src', e.target.result);
+//         }
+//         reader.readAsDataURL(input.files[0]);
+//         }
+//     }
+//     $("#user_img").change(function(){
+//         readURL(this);
+//     });
+//   })
 </script>

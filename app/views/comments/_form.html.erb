@@ -1,12 +1,11 @@
 <%= render "shared/error_messages" %>
 
 <div class="p-comment__formBox">
-  <p class="p-comment__formTitle">コメント記入</p>
+  <p class="p-comment__formTitle">コメントを入力（１５０文字以内）</p>
   <%= form_with model: comment do |f| %>
     <%= f.hidden_field :post_id %>
     <div class="form-group">
-      <%= f.label :comment, 'コメント' %>
-      <%= f.text_area :comment, class: 'form-control', rows: 4 %>
+      <%= f.text_area :comment, class: 'form-control', rows: 6 %>
     </div>
     <%= f.submit '送信', class: 'btn btn-primary' %>
   <% end %>
