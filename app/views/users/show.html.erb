@@ -1,20 +1,27 @@
 <% provide :title, 'マイページ' %>
 
-<div class="container mb-md-5" style="max-width: 700px;">
-  <div class="row">
-
-    <h1>マイページ</h1>
+<div class="container mt-5">
+  <div class="row mx-auto" style="max-width: 700px;">
     <div class="d-none d-md-block pr-5">
       <% if @user.avatar? %>
-        <%= image_tag(@user.avatar.url, size: "250x250", class: "rounded-circle z-depth-0 avatar-image", alt: "avatar image") %>
+        <%= image_tag(@user.avatar.url, size: "250x250", class: "rounded-circle z-depth-0", alt: "avatar image") %>
       <% else %>
-        <%= image_tag("no-avatar.png", size: "250x250", class: "rounded-circle z-depth-0 avatar-image", alt: "avatar image") %>
+        <%= image_tag("no-avatar.png", size: "250x250", class: "rounded-circle z-depth-0", alt: "avatar image") %>
       <% end %>
     </div>
-    <p><%= @user.name %></p>
-    <p><%= @user.email %></p>
-    <% if user_signed_in? && current_user.id == @user.id %>
-      <%= link_to '編集', edit_user_path(current_user), class:'btn btn-outline-dark' %>
-    <% end %>
+      <div class="d-flex flex-column mt-3">
+        <div class="user-name font-weight-bold">
+          <%= @user.name %>
+        </div>
+        <div class="user-menu">
+          <% if user_signed_in? && current_user.id == @user.id %>
+            <%= link_to 'プロフィール編集', edit_user_path(current_user), class:'btn btn-outline-dark' %>
+          <% end %>
+        </div>
+        <div class="user-profile" style="width: 400px; height: 190px; overflow: hidden;">
+          <%= simple_format(@user.profile) %>
+        </div>
+      </div>
+
   </div>
 </div>
