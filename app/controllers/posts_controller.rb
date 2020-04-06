@@ -3,7 +3,10 @@ class PostsController < ApplicationController
   before_action :set_form_title, only: %i[new edit]
 
   def index
-    @posts = Post.all
+    # @posts = Post.all
+    # @posts = Post.all.order(created_at: :DESC)
+    @posts = Post.page(params[:page]).per(24)
+    # @posts = Post.page(params[:page]).per(24).order('created_at DESC')
   end
 
   def new

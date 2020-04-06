@@ -7,7 +7,7 @@
   <h2 class="text-center font-weight-bold my-4">みんなの天気</h2>
   <div class="row post-cards">
     <% @posts.each do |post| %>
-      <div class="col-sm-4">
+      <div class="col-lg-4 col-md-6">
         <div class="card card-index">
           <div class="card-header" >
             <div class="post-user">
@@ -23,5 +23,13 @@
         </div>
       </div>
     <% end %>
+
+    <div class="posts-footer">
+      <%= paginate @posts %>
+      <div class="loadmore-brn-wrapper p-0 d-flex">
+        <button class="loadmore-btn btn active mx-auto">さらに表示</button>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -4,3 +4,17 @@
 #user_avatar {
   display: none;
 }
+
+
+
+.nav-link {
+  color: #999;
+  &:hover {
+    color: #495057;
+  }
+}
+.no-contents {
+  color: #999;
+  font-size: 1.15rem;
+  margin-top: 80px;
+}

@@ -126,3 +126,28 @@
     padding-left: 7px;
   }
 }
+
+
+
+div.PhotoBox {
+  position: relative;
+  overflow: hidden;
+}
+div.PhotoBox div.SlideBox {
+  position: absolute;
+  left: 0px;
+  bottom: -70px;              /* 画像の高さに合わせる */
+  width: 100%;                /* 画像の横幅に合わせる */
+  height: 70px;               /* スライドして重ねる領域の高さ */
+  background-color: black;  /* スライドして重ねる領域の背景色 */
+  color: white;             /* スライドして重ねる領域の文字色 */
+  opacity: 0.6;               /* スライドして重ねる領域の透明度 */
+}
+div.PhotoBox div.SlideBox p.Caption {
+  font-weight: bold;
+  font-size: 90%;
+  margin: 0.5em;
+}
+div.SlideBox p{
+  padding-left: 5px;
+}
