@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_target_user
 
   def show
-
+    @posts = Post.where(user_id: @user.id).order(created_at: :DESC)
   end
 
   def edit; end
