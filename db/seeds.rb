@@ -2,28 +2,28 @@ Faker::Config.locale = :ja
 
 # ゲストユーザー作成
 User.create!(name:  "Guest User",
-             email: "guest@example.com",
-             password:              "12345678",
-             password_confirmation: "12345678",
-             confirmed_at: Time.zone.now,
-             confirmation_sent_at: Time.zone.now)
+            email: "guest@example.com",
+            password:              "12345678",
+            password_confirmation: "12345678",
+            confirmed_at: Time.zone.now,
+            confirmation_sent_at: Time.zone.now)
 
 1.upto(49) do |n|
   name  = Faker::Name.name
   email = "sample-#{n}@example.com"
   password = "password"
   User.create!(name:  name,
-               email: email,
-               password:              password,
-               password_confirmation: password,
-               confirmed_at: Time.zone.now,
-               confirmation_sent_at: Time.zone.now)
+              email: email,
+              password:              password,
+              password_confirmation: password,
+              confirmed_at: Time.zone.now,
+              confirmation_sent_at: Time.zone.now)
 end
 
 users = User.order(:created_at).take(10)
 
 users.each_with_index do |user, n|
-  user.avatar = open("#{Rails.root}/db/fixtures/avatar#{n}.jpg")
+  user.avatar = open("#{Rails.root}/db/fixtures/avatar/avatar-#{n + 1}.jpg")
   user.save
 end
 
