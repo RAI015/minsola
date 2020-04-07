@@ -18,4 +18,8 @@ module ApplicationHelper
       link_to name, path, class: 'nav-link'
     end
   end
+
+  def set_address(prefecture, city)
+    "#{prefecture} #{city}"
+  end
 end

@@ -7,8 +7,7 @@ ja:
         password: パスワード
         password_confirmation: 確認用パスワード
       post:
-        title: タイトル
-        body: 本文
+        caption: キャプション
       comment:
         comment: コメント
   views:

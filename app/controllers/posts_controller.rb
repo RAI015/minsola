@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   def create
     post = current_user.posts.build(post_params)
     if post.save
-      flash[:success] = "「#{post.title}」の記事を作成しました"
+      flash[:success] = "「#{set_address(post.prefecture.name, post.city.name)}」の記事を作成しました"
       redirect_to root_path
     else
       redirect_to new_post_path, flash: {
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to root_path, flash: { success: "「#{@post.title}」の記事が削除されました" }
+    redirect_to root_path, flash: { success: "「#{set_address(@post.prefecture.name, @post.city.name)}」の記事が削除されました" }
   end
 
   def show
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:success] = "「#{@post.title}」の記事を編集しました"
+      flash[:success] = "「#{set_address(@post.prefecture.name, @post.city.name)}」の記事を編集しました"
       redirect_to root_path
     else
       redirect_back fallback_location: root_path, flash: {
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image, :user_id)
+    params.require(:post).permit(:caption, :image, :user_id, :prefecture_id, :city_id, :weather, :feeling, :expectation)
   end
 
   def set_target_post

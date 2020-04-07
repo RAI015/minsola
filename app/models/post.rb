@@ -2,29 +2,38 @@
 #
 # Table name: posts
 #
-#  id         :bigint           not null, primary key
-#  body       :text(65535)      not null
-#  image      :string(255)
-#  title      :string(255)      not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint
+#  id            :bigint           not null, primary key
+#  caption       :text(65535)      not null
+#  expectation   :string(255)      not null
+#  feeling       :string(255)      not null
+#  image         :string(255)
+#  weather       :string(255)      not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  city_id       :bigint           not null
+#  prefecture_id :bigint           not null
+#  user_id       :bigint
 #
 # Indexes
 #
-#  index_posts_on_user_id  (user_id)
+#  index_posts_on_city_id        (city_id)
+#  index_posts_on_prefecture_id  (prefecture_id)
+#  index_posts_on_user_id        (user_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (city_id => cities.id)
+#  fk_rails_...  (prefecture_id => prefectures.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
+  belongs_to :prefecture
+  belongs_to :city
 
   mount_uploader :image, ImageUploader
-  validates :title, presence: true, length: { maximum: 30 }
-  validates :body, presence: true, length: { maximum: 500 }
+  validates :caption, presence: true, length: { maximum: 300 }
   validate :image_size
 
   private
