@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @posts = Post.where(user_id: @user.id).order(created_at: :DESC)
+    @posts = @posts.page(params[:page]).per(12)
   end
 
   def edit; end

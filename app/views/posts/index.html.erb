@@ -23,13 +23,8 @@
         </div>
       </div>
     <% end %>
-
-    <div class="posts-footer">
-      <%= paginate @posts %>
-      <div class="loadmore-brn-wrapper p-0 d-flex">
-        <button class="loadmore-btn btn active mx-auto">さらに表示</button>
-      </div>
-    </div>
-
   </div>
+
+  <%= paginate @posts %>
+
 </div>
