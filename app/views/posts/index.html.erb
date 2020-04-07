@@ -4,7 +4,7 @@
 <% end %>
 
 <div class="container">
-  <h2 class="text-center font-weight-bold my-4">みんなの天気</h2>
+  <h2 class="text-center font-weight-bold mt-4 mb-3">みんなの天気</h2>
   <div class="row post-cards">
     <% @posts.each do |post| %>
       <div class="col-lg-4 col-md-6">
@@ -15,7 +15,7 @@
               <%= link_to post.user.name, post.user %>
             </div>
             <div class="post-info">
-              <small><%= post.title %></small><br>
+              <small><%= set_address(post.prefecture.name, post.city.name) %></small><br>
               <small><%= post.created_at.to_s(:datetime_jp) %></small>
             </div>
           </div>

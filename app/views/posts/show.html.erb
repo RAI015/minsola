@@ -1,4 +1,4 @@
-<% provide :title, @post.title %>
+<% provide :title, set_address(@post.prefecture.name, @post.city.name) %>
 
 <% if flash[:success] %>
   <div class="alert alert-primary"><%= flash[:success] %></div>

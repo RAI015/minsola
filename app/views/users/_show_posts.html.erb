@@ -4,7 +4,7 @@
       <div class="card card-index PhotoBox">
         <%= link_to image_tag(post.image.to_s, class: 'weather_image_index', alt: 'Weather image'), post %>
           <div class="SlideBox">
-            <p><%= post.title %></p>
+            <p><%= set_address(post.prefecture.name, post.city.name) %></p>
             <p><%= post.created_at.to_s(:datetime_jp) %></p>
           </div>
       </div>

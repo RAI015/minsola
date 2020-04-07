@@ -24,11 +24,12 @@ main {
 
 /* footer */
 footer {
-  background: #272727;
+  background: #343a40;
   color: #fff;
   text-align: center;
   p {
-    padding: 1rem;
+    font-size: 0.9rem;
+    padding: 0.6rem;
     margin-bottom: 0;
   }
 }
@@ -53,7 +54,7 @@ footer {
 
 /* PostForm */
 .post_form {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 
