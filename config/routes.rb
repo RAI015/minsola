@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  resources :posts
+  resources :posts do
+    collection do
+      get :cities_select
+    end
+  end
   resources :comments, only: %i[create destroy]
   resources :users, only: %i[show edit update]
   devise_for :users, controllers: {
@@ -14,4 +18,5 @@ Rails.application.routes.draw do
     get 'login', to: 'users/sessions#new'
     get 'logout', to: 'users/sessions#destroy'
   end
+
 end

@@ -11,6 +11,20 @@
   </div>
   <div class="card-body">
     <%= image_tag(post.image.to_s, class: 'weather_image_post', alt: 'Weather image') %>
+
+    <ul class="list-inline" style="margin: 1.25rem auto 0 auto;">
+      <li class="list-inline-item">
+        <a href="#" class="btn btn-like">いいね！<i class="far fa-heart"></i></a>
+      </li>
+      <% if user_signed_in? && current_user.id == post.user.id %>
+        <li class="list-inline-item float-right">
+          <%= link_to '削除', @post, method: :delete, data: { confirm: '投稿を削除してもよろしいですか？' }, class:'btn btn-outline-dark' %>
+        </li>
+        <li class="list-inline-item float-right mr-2">
+          <%= link_to '編集', edit_post_path(@post), class:'btn btn-outline-dark' %>
+        </li>
+      <% end %>
+    </ul>
   </div>
   <div class="card-footer">
     <%= simple_format(post.caption) %>
@@ -35,11 +49,16 @@
 
       <ul class="list-inline" style="margin-bottom: 0px;">
         <li class="list-inline-item">
-          <%= link_to image_tag(post.user.avatar.to_s, class: 'user_avatar'), post.user, class: 'mr-2' %>
-          <%= link_to post.user.name, post.user %>
+          <a href="#" class="btn btn-like">いいね！<i class="far fa-heart"></i></a>
         </li>
         <% if user_signed_in? && current_user.id == post.user.id %>
           <li class="list-inline-item float-right"><%= link_to '削除', @post, method: :delete, data: { confirm: '投稿を削除してもよろしいですか？' }, class:'btn btn-outline-dark' %></li>
           <li class="list-inline-item float-right mr-2"><%= link_to '編集', edit_post_path(@post), class:'btn btn-outline-dark' %></li>
         <% end %>
       </ul>
+
+      <a href="#" class="btn btn-danger">いいね！<i class="far fa-heart"></i></a>
+      <% if user_signed_in? && current_user.id == post.user.id %>
+        <%= link_to '編集', edit_post_path(@post), class:'btn btn-outline-dark' %>
+        <%= link_to '削除', @post, method: :delete, data: { confirm: '投稿を削除してもよろしいですか？' }, class:'btn btn-outline-dark' %>
+      <% end %>
