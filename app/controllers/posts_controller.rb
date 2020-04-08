@@ -49,6 +49,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def cities_select
+    if request.xhr?
+      render partial: 'cities', locals: { prefecture_id: params[:prefecture_id] }
+    end
+  end
+
   private
 
   def post_params

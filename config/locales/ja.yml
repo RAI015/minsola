@@ -8,6 +8,12 @@ ja:
         password_confirmation: 確認用パスワード
       post:
         caption: キャプション
+        image: 画像
+        wheather: 天気
+        feeling: 体感
+        expectation: 予想
+        prefecture: 都道府県
+        city: 市区町村
       comment:
         comment: コメント
   views:

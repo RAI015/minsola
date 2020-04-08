@@ -1,0 +1,2 @@
+<label for="post_city_id">市区町村</label>
+<%= collection_select(:post, :city_id, City.where(prefecture_id: prefecture_id), :id, :name,  { prompt: '選択してください' }, { class: "form-control" }) %>

@@ -65,11 +65,11 @@ expectations = %w[今と変化なさそう 回復しそう 下り坂になりそ
 
 i = 0
 users.each do
-  1.upto(5) do |j|
+  1.upto(8) do |j|
     # Cityマスタからランダムに1件返す
     cities = City.where('id >= ?', rand(City.first.id..City.last.id)).first
 
-    j = ((i * 5) + j) + 1
+    j = ((i * 8) + j) + 1
     image = open("#{Rails.root}/db/fixtures/sola/sola-#{j}.jpg")
     caption = Faker::Lorem.paragraph_by_chars
     weather = wheathers.sample
