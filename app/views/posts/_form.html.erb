@@ -25,7 +25,7 @@
               <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, { prompt: '選択してください', selected: post.prefecture_id }, { class: "form-control input-sm" }) %>
             </td>
             <td style="width: 55%; padding-left: 10px;">
-              <div class="" id="cities_select">
+              <div id="cities_select">
                 <%= render partial: 'cities', locals: { prefecture_id: post.prefecture_id } %>
               </div>
             </td>
@@ -65,7 +65,6 @@
 
   $(function(){
     $fileField = $('#post_image')
-
     // 選択された画像を取得し表示
     $($fileField).on('change', $fileField, function(e) {
       file = e.target.files[0]
@@ -86,5 +85,4 @@
       reader.readAsDataURL(file);
     });
   });
-
 </script>

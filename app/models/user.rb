@@ -28,10 +28,30 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :validatable #, :confirmable
+         :recoverable, :rememberable, :validatable #, :confirmable
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  # お気に入り機能用中間テーブル
+  has_many :likes, dependent: :destroy
+  has_many :like_posts, through: :likes, source: :post
 
   mount_uploader :avatar, AvatarUploader
   validates :name, presence: true, length: { maximum: 10 }
+
+  # お気に入り追加
+  def like(post)
+    likes.find_or_create_by(post_id: post.id)
+  end
+
+  # お気に入り削除
+  def unlike(post)
+    likes.find_by(post_id: post.id).destroy
+  end
+
+  # お気に入り登録判定
+  def like?(post)
+    like_posts.include?(post)
+  end
+
 end

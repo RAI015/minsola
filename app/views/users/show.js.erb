@@ -1,0 +1,7 @@
+if($("ul.nav-tabs a#items1-tab").selected == true) {
+  <% obs = @posts %>
+}
+if($("ul.nav-tabs a#items4-tab").selected == true) {
+  <% obs = @like_posts %>
+}
+$(".paginate").html("<%= j(render 'show_posts',{ posts: obs }) %>");

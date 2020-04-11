@@ -3,7 +3,15 @@ class UsersController < ApplicationController
 
   def show
     @posts = Post.where(user_id: @user.id).order(created_at: :DESC)
-    @posts = @posts.page(params[:page]).per(12)
+    @like_posts = @user.like_posts
+
+    # @posts = @posts.page(params[:page]).per(12)
+    # @like_posts = @user.like_posts.page(params[:page]).per(12)
+    
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
   end
 
   def edit; end
@@ -18,6 +26,10 @@ class UsersController < ApplicationController
         error_messages: @user.errors.full_messages
       }
     end
+  end
+
+  def like_posts
+    
   end
 
   private

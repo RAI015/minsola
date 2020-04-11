@@ -4,9 +4,15 @@ Rails.application.routes.draw do
     collection do
       get :cities_select
     end
+
+    resource :likes, only: %i[create destroy]
   end
   resources :comments, only: %i[create destroy]
-  resources :users, only: %i[show edit update]
+  resources :users, only: %i[show edit update] do
+    member do
+      get :like_posts
+    end
+  end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -18,5 +24,7 @@ Rails.application.routes.draw do
     get 'login', to: 'users/sessions#new'
     get 'logout', to: 'users/sessions#destroy'
   end
+
+  # resources :likes, only: %i[create destroy]
 
 end

@@ -64,6 +64,25 @@ footer {
   display: none;
 }
 
+// .btn-unlike {
+//   color: #343a40;
+//   border: 1px solid #343a40;
+//   border-radius: 50rem;
+//   &:hover {
+//     color: #fff;
+//     background-color: #343a40;
+//   }
+// }
+.btn-cantlike {
+  cursor: default;
+  color: #f90e43;
+  border: 1px solid #f90e43;
+  border-radius: 50rem;
+  &:hover {
+    color: #f90e43;
+    background-color: #fff;
+  }
+}
 .btn-like {
   color: #f90e43;
   border: 1px solid #f90e43;
@@ -73,3 +92,15 @@ footer {
     background-color: #f90e43;
   }
 }
+
+// .page-load-status {
+//   display: none; /* hidden by default */
+//   padding-top: 20px;
+//   border-top: 1px solid #DDD;
+//   text-align: center;
+//   color: #777;
+// }
+
+// div.tab-content ul.pagination {
+//   display: none;
+// }
