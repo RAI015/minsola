@@ -4,9 +4,9 @@
   <div class="row mx-auto" style="max-width: 700px;">
     <div class="pr-5 col-sm-5">
       <% if @user.avatar? %>
-        <%= image_tag(@user.avatar.url, size: "250x250", class: "rounded-circle z-depth-0", alt: "avatar image") %>
+        <%= image_tag(@user.avatar.url, size: "250x250", class: "rounded-circle", alt: "avatar image") %>
       <% else %>
-        <%= image_tag("no-avatar.png", size: "250x250", class: "rounded-circle z-depth-0", alt: "avatar image") %>
+        <%= image_tag("no-avatar.png", size: "250x250", class: "rounded-circle", alt: "avatar image") %>
       <% end %>
     </div>
     <div class="d-flex flex-column mt-3 col-sm-7">
@@ -14,11 +14,14 @@
         <%= @user.name %>
       </div>
       <div class="user-menu pb-2">
-        <% if user_signed_in? && current_user.id == @user.id %>
+      <% if user_signed_in? %>
+        <% if current_user.id == @user.id %>
           <%= link_to 'プロフィール編集', edit_user_path(current_user), class:'btn btn-outline-dark' %>
         <% else %>
           <%= link_to 'フォローする', edit_user_path(current_user), class:'btn btn-outline-dark' %>
         <% end %>
+
+      <% end %>
       </div>
       <div class="user-profile" style="width: 400px; height: 140px; overflow: hidden;">
         <%= simple_format(@user.profile) %>
@@ -37,14 +40,16 @@
       <a class="nav-link" id="item3-tab" data-toggle="tab" href="#item3" role="tab" aria-controls="item3" aria-selected="false">フォロワー</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="item4-tab" data-toggle="tab" href="#item4" role="tab" aria-controls="item4" aria-selected="false">いいね</a>
+      <a class="nav-link" id="item4-tab" data-toggle="tab" href="#item4" role="tab" aria-controls="item4" aria-selected="false"><%= 'いいね ' + @user.like_posts.count.to_s(:delimited) %></a>
     </li>
   </ul>
 
   <div class="tab-content">
     <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
       <% if @user.posts.any? %>
-        <%= render partial: 'show_posts', locals: { posts: @posts } %>
+        <div id="show-posts">
+          <%= render partial: 'show_posts', locals: { objects: @posts } %>
+        </div>
       <% else %>
         <div class="no-contents d-flex justify-content-center align-items-center">
           投稿がありません
@@ -62,9 +67,35 @@
       </div>
     </div>
     <div class="tab-pane fade" id="item4" role="tabpanel" aria-labelledby="item4-tab">
-      <div class="no-contents d-flex justify-content-center align-items-center">
-        いいね！ した投稿がありません
-      </div>
+      <% if @user.like_posts.any? %>
+        <div id="show-likes">
+          <%= render partial: 'show_posts', locals: { objects: @like_posts } %>
+        </div>
+      <% else %>
+        <div class="no-contents d-flex justify-content-center align-items-center">
+          いいね！ した投稿がありません
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
+
+<%# <script type="text/javascript">
+  $(function(){
+    $(".PhotoBox").hover(function(){
+      $(".SlideBox",this).stop().animate({bottom:"0px"},"fast");
+    },function(){
+      $(".SlideBox",this).stop().animate({bottom:"-70px"},"slow");
+    });
+  })
+
+
+  $("ul.pagination a.page-link").click(function(){
+    if($("ul.nav-tabs a#items1-tab").selected == true) {
+      $("ul.nav-tabs a#items1-tab").selected = true;
+    }
+    if($("ul.nav-tabs a#items4-tab").selected == true) {
+      $("ul.nav-tabs a#items4-tab").selected = true;
+    }
+  })
+</script> %>

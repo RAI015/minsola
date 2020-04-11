@@ -32,9 +32,17 @@ class Post < ApplicationRecord
   belongs_to :prefecture
   belongs_to :city
 
+  # お気に入り機能用中間テーブル
+  has_many :likes, foreign_key: 'post_id', dependent: :destroy
+  # has_many :users, through: :likes
+
   mount_uploader :image, ImageUploader
   validates :caption, presence: true, length: { maximum: 300 }
   validate :image_size
+
+  def liked_by?(user)
+    likes.where(user_id: user.id).exists?
+  end
 
   private
 

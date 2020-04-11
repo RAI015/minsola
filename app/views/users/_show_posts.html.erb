@@ -1,18 +1,16 @@
 <div class="row">
-  <% posts.each do |post| %>
+  <% objects.each do |object| %>
     <div class="col-lg-4 col-md-6">
       <div class="card card-index PhotoBox">
-        <%= link_to image_tag(post.image.to_s, class: 'weather_image_index', alt: 'Weather image'), post %>
-          <div class="SlideBox">
-            <p><%= set_address(post.prefecture.name, post.city.name) %></p>
-            <p><%= post.created_at.to_s(:datetime_jp) %></p>
-          </div>
+        <%= link_to image_tag(object.image.to_s, class: 'weather_image_index', alt: 'Weather image'), object %>
+        <div class="SlideBox">
+          <p><%= set_address(object.prefecture.name, object.city.name) %></p>
+          <p><%= object.created_at.to_s(:datetime_jp) %></p>
+        </div>
       </div>
     </div>
   <% end %>
 </div>
-
-<%= paginate posts %>
 
 <script type="text/javascript">
   $(function(){
