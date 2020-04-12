@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   end
   resources :comments, only: %i[create destroy]
   resources :users, only: %i[show edit update] do
+    resource :relationships, only: %i[create destroy]
     member do
       get :like_posts
+      get :follows
+      get :followers
     end
   end
   devise_for :users, controllers: {

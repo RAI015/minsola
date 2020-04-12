@@ -104,3 +104,48 @@ footer {
 // div.tab-content ul.pagination {
 //   display: none;
 // }
+
+.btn-follow {
+  min-width: 104px;
+  border-radius: 50rem;
+  color: #fff;
+  background-color: #f90e43;
+  &:hover {
+    color: #f90e43;
+    background-color: #fff;
+    border-color: #f90e43;
+  }
+}
+.btn-unfollow {
+  min-width: 104px;
+  border-radius: 50rem;
+  color: #f90e43;
+  background-color: rgba(0,0,0,0.1);
+  &:hover {
+    color: rgba(0,0,0,0.5);
+  }
+}
+
+
+.user-card {
+  background-color: rgba(0,0,0,0.1);
+  padding: 20px;
+  min-height: 300px;
+  .user-name {
+    margin: 15px auto 10px auto;
+    text-decoration: none;
+    color: #666;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+ul.nav-tabs li.nav-item {
+  min-width: 128px;
+  text-align: center;
+}
+.status-value {
+  display: inline;
+  font-weight: 600;
+  font-size: 0.95rem;
+}

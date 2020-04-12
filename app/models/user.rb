@@ -36,6 +36,13 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_posts, through: :likes, source: :post
 
+  # 自分がフォローしているユーザーとの関連
+  has_many :active_relationships, class_name: 'Relationship', foreign_key: :following_id, dependent: :destroy
+  has_many :followings, through: :active_relationships, source: :follower
+  # 自分がフォローされるユーザーとの関連
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: :follower_id, dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :following
+
   mount_uploader :avatar, AvatarUploader
   validates :name, presence: true, length: { maximum: 10 }
 
@@ -52,6 +59,21 @@ class User < ApplicationRecord
   # お気に入り登録判定
   def like?(post)
     like_posts.include?(post)
+  end
+
+  # ユーザーをフォローする
+  def follow(other_user)
+    followings << other_user
+  end
+
+  # ユーザーをフォロー解除する
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # フォローしているか判定
+  def followed_by?(user)
+    passive_relationships.find_by(following_id: user.id).present?
   end
 
 end
