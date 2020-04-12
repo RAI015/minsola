@@ -7,11 +7,14 @@ class UsersController < ApplicationController
 
     # @posts = @posts.page(params[:page]).per(12)
     # @like_posts = @user.like_posts.page(params[:page]).per(12)
-    
+
     # respond_to do |format|
     #   format.html
     #   format.js
     # end
+
+    @followings = @user.followings
+    @followers = @user.followers
   end
 
   def edit; end
@@ -28,9 +31,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def like_posts
-    
-  end
+  def like_posts; end
 
   private
 

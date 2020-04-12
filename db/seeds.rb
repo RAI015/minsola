@@ -58,7 +58,7 @@ users.each do
     # Cityマスタからランダムに1件返す
     cities = City.where('id >= ?', rand(City.first.id..City.last.id)).first
 
-    j = ((i * 8) + j) + 1
+    j = ((i * 8) + j)
     image = open("#{Rails.root}/db/fixtures/sola/sola-#{j}.jpg")
     caption = Faker::TvShows::BojackHorseman.quote
     weather = wheathers.sample
@@ -99,7 +99,7 @@ CSV.foreach('db/csv/profile.csv') do |row|
 end
 
 # 記事のキャプション
-CSV.foreach('db/csv/caption.csv') do |row|
+CSV.foreach('db/csv/caption2.csv') do |row|
   post_id = row[0]
   caption = row[1]
 
@@ -114,6 +114,14 @@ CSV.foreach('db/csv/comment.csv') do |row|
 
   Comment.create!(user_id: user_id, post_id: post_id, comment: comment)
 end
+
+# リレーションシップ
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
 
 # i = 0
 # 50.times do

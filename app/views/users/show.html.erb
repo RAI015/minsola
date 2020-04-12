@@ -4,7 +4,7 @@
   <div class="row mx-auto" style="max-width: 700px;">
     <div class="pr-5 col-sm-5">
       <% if @user.avatar? %>
-        <%= image_tag(@user.avatar.url, size: "250x250", class: "rounded-circle", alt: "avatar image") %>
+        <%= image_tag(@user.avatar.to_s, size: "250x250", class: "rounded-circle", alt: "avatar image") %>
       <% else %>
         <%= image_tag("no-avatar.png", size: "250x250", class: "rounded-circle", alt: "avatar image") %>
       <% end %>
@@ -18,7 +18,7 @@
         <% if current_user.id == @user.id %>
           <%= link_to 'プロフィール編集', edit_user_path(current_user), class:'btn btn-outline-dark' %>
         <% else %>
-          <%= link_to 'フォローする', edit_user_path(current_user), class:'btn btn-outline-dark' %>
+          <%= render 'follow_area', user: @user %>
         <% end %>
 
       <% end %>
@@ -31,24 +31,40 @@
 
   <ul class="nav nav-tabs justify-content-center mt-3">
     <li class="nav-item">
-      <a class="nav-link active" id="item1-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true"><%= '投稿 ' + @user.posts.count.to_s(:delimited) %></a>
+      <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">
+        <span>投稿</span>
+        <div class="status-value"><%= @user.posts.count.to_s(:delimited) %></div>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false">フォロー</a>
+      <a class="nav-link" id="followings-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="true">
+        <span>フォロー</span>
+        <div class="status-value" id="followings_<%= @user.id %>">
+          <%= @user.followings.count.to_s(:delimited) %>
+        </div>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="item3-tab" data-toggle="tab" href="#item3" role="tab" aria-controls="item3" aria-selected="false">フォロワー</a>
+      <a class="nav-link" id="followers-tab" data-toggle="tab" href="#item3" role="tab" aria-controls="item3" aria-selected="true">
+        <span>フォロワー</span>
+        <div class="status-value" id="followers_<%= @user.id %>">
+          <%= @user.followers.count.to_s(:delimited) %>
+        </div>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="item4-tab" data-toggle="tab" href="#item4" role="tab" aria-controls="item4" aria-selected="false"><%= 'いいね ' + @user.like_posts.count.to_s(:delimited) %></a>
+      <a class="nav-link" id="likes-tab" data-toggle="tab" href="#item4" role="tab" aria-controls="item4" aria-selected="true">
+        <span>いいね</span>
+        <div class="status-value"><%= @user.like_posts.count.to_s(:delimited) %></div>
+      </a>
     </li>
   </ul>
 
   <div class="tab-content">
-    <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+    <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="posts-tab">
       <% if @user.posts.any? %>
         <div id="show-posts">
-          <%= render partial: 'show_posts', locals: { objects: @posts } %>
+          <%= render 'show_posts', objects: @posts %>
         </div>
       <% else %>
         <div class="no-contents d-flex justify-content-center align-items-center">
@@ -56,20 +72,28 @@
         </div>
       <% end %>
     </div>
-    <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="item2-tab">
-      <div class="no-contents d-flex justify-content-center align-items-center">
-        誰もフォローしていません
-      </div>
+    <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="followings-tab">
+      <% if @user.followings.any? %>
+        <%= render 'show_follows', objects: @followings %>
+      <% else %>
+        <div class="no-contents d-flex justify-content-center align-items-center">
+          誰もフォローしていません
+        </div>
+      <% end %>
     </div>
-    <div class="tab-pane fade" id="item3" role="tabpanel" aria-labelledby="item3-tab">
-      <div class="no-contents d-flex justify-content-center align-items-center">
-        フォローされていません
-      </div>
+    <div class="tab-pane fade" id="item3" role="tabpanel" aria-labelledby="followers-tab">
+      <% if @user.followers.any? %>
+        <%= render 'show_follows', objects: @followers %>
+      <% else %>
+        <div class="no-contents d-flex justify-content-center align-items-center">
+          フォローされていません
+        </div>
+      <% end %>
     </div>
-    <div class="tab-pane fade" id="item4" role="tabpanel" aria-labelledby="item4-tab">
+    <div class="tab-pane fade" id="item4" role="tabpanel" aria-labelledby="likes-tab">
       <% if @user.like_posts.any? %>
         <div id="show-likes">
-          <%= render partial: 'show_posts', locals: { objects: @like_posts } %>
+          <%= render 'show_posts', objects: @like_posts %>
         </div>
       <% else %>
         <div class="no-contents d-flex justify-content-center align-items-center">

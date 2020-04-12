@@ -1,0 +1,18 @@
+<div class="row">
+  <% objects.each do |user| %>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="user-card card card-index align-items-center">
+        <% if user.avatar? %>
+          <%= link_to image_tag(user.avatar.to_s, size: "150x150", class: "rounded-circle", alt: "avatar image"), user %>
+        <% else %>
+          <%= link_to image_tag("no-avatar.png", size: "150x150", class: "rounded-circle", alt: "avatar image"), user %>
+        <% end %>
+        <%= link_to user.name, user, class: 'user-name' %>
+
+        <% if user_signed_in? %>
+          <%= render 'follow_area', user: user %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
