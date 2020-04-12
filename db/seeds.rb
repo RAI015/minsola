@@ -60,7 +60,7 @@ users.each do
 
     j = ((i * 8) + j) + 1
     image = open("#{Rails.root}/db/fixtures/sola/sola-#{j}.jpg")
-    caption = Faker::Lorem.paragraph_by_chars
+    caption = Faker::TvShows::BojackHorseman.quote
     weather = wheathers.sample
     feeling = feelings.sample
     expectation = expectations.sample
@@ -75,7 +75,7 @@ users.each do
       expectation: expectation,
       prefecture_id: prefecture_id,
       city_id: city_id,
-      created_at: i == 0 ? Time.zone.now : rand(Time.zone.yesterday.beginning_of_day..Time.zone.yesterday.end_of_day)
+      created_at: i.zero? ? Time.zone.now : rand(Time.zone.yesterday.beginning_of_day..Time.zone.yesterday.end_of_day)
     )
   end
   i += 1
@@ -88,6 +88,31 @@ users.each do |user|
   posts.each do |post|
     user.like(post) unless user.id == post.user_id
   end
+end
+
+# ユーザープロフィール文
+CSV.foreach('db/csv/profile.csv') do |row|
+  user_id = row[0]
+  profile = row[1]
+
+  User.where(id: user_id).update(profile: profile)
+end
+
+# 記事のキャプション
+CSV.foreach('db/csv/caption.csv') do |row|
+  post_id = row[0]
+  caption = row[1]
+
+  Post.where(id: post_id).update(caption: caption)
+end
+
+# コメント
+CSV.foreach('db/csv/comment.csv') do |row|
+  user_id = row[0]
+  post_id = row[1]
+  comment = row[2]
+
+  Comment.create!(user_id: user_id, post_id: post_id, comment: comment)
 end
 
 # i = 0
