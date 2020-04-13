@@ -3,12 +3,14 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE)
 #  avatar                 :string(255)
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
+#  guest                  :boolean          default(FALSE)
 #  name                   :string(255)      not null
 #  profile                :text(65535)
 #  remember_created_at    :datetime

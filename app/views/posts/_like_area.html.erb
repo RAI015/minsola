@@ -1,5 +1,5 @@
 <div id="like_btn_<%= post.id %>">
-  <% if current_user.id == post.user.id %>
+  <% if current_user.id == post.user.id || current_user.admin? %>
     <%= link_to '', class: 'btn btn-cantlike' do %>
       <%= "#{post.likes.count} いいね！"%><i class="far fa-heart"></i>
     <% end %>

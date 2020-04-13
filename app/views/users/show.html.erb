@@ -15,12 +15,19 @@
       </div>
       <div class="user-menu pb-2">
       <% if user_signed_in? %>
-        <% if current_user.id == @user.id %>
-          <%= link_to 'プロフィール編集', edit_user_path(current_user), class:'btn btn-outline-dark' %>
+        <% if current_user.admin? %>
+          <% if @user.admin? || @user.guest? %>
+            <!-- なにも表示しない -->
+          <% else %>
+            <%= link_to 'このユーザーを削除する', @user, method: :delete, data: { confirm: 'このユーザーを削除しますか？' }, class:'btn btn-outline-dark' %>
+          <% end %>
         <% else %>
-          <%= render 'follow_area', user: @user %>
+          <% if current_user.id == @user.id %>
+            <%= link_to 'プロフィール編集', edit_user_path(current_user), class:'btn btn-outline-dark' %>
+          <% else %>
+            <%= render 'follow_area', user: @user %>
+          <% end %>
         <% end %>
-
       <% end %>
       </div>
       <div class="user-profile" style="width: 400px; height: 140px; overflow: hidden;">

@@ -1,0 +1,29 @@
+<% provide :title, 'すべてのユーザー' %>
+<% if flash[:success] %>
+  <div class="time-limit alert alert-primary"><%= flash[:success] %></div>
+<% end %>
+
+<div class="container">
+  <h2 class="text-center font-weight-bold mt-4 mb-3">すべてのユーザー</h2>
+  <div class="row user-cards">
+    <% @users.each do |user| %>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="user-card card card-index align-items-center">
+          <% if user.avatar? %>
+            <%= link_to image_tag(user.avatar.to_s, size: "150x150", class: "rounded-circle", alt: "avatar image"), user %>
+          <% else %>
+            <%= link_to image_tag("no-avatar.png", size: "150x150", class: "rounded-circle", alt: "avatar image"), user %>
+          <% end %>
+          <%= link_to user.name, user, class: 'user-name' %>
+
+          <% if current_user.admin? && !(user.admin?) && !(user.guest?) %>
+            <%= link_to 'このユーザーを削除する', user, method: :delete, data: { confirm: 'このユーザーを削除しますか？' }, class:'btn btn-danger' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= paginate @users %>
+
+</div>

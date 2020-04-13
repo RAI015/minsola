@@ -17,13 +17,19 @@
         <li class="list-inline-item">
           <%= render 'like_area', post: post %>
         </li>
-        <% if user_signed_in? && current_user.id == post.user.id %>
+        <% if current_user.admin? %>
           <li class="list-inline-item float-right">
             <%= link_to '削除', @post, method: :delete, data: { confirm: '投稿を削除してもよろしいですか？' }, class:'btn btn-outline-dark' %>
           </li>
-          <li class="list-inline-item float-right mr-2">
-            <%= link_to '編集', edit_post_path(@post), class:'btn btn-outline-dark' %>
-          </li>
+        <% else %>
+          <% if current_user.id == post.user.id %>
+            <li class="list-inline-item float-right">
+              <%= link_to '削除', @post, method: :delete, data: { confirm: '投稿を削除してもよろしいですか？' }, class:'btn btn-outline-dark' %>
+            </li>
+            <li class="list-inline-item float-right mr-2">
+              <%= link_to '編集', edit_post_path(@post), class:'btn btn-outline-dark' %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     <% end %>

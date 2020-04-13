@@ -4,7 +4,7 @@
     <%= link_to image_tag(comment.user.avatar.to_s, class: 'user_avatar'), comment.user %>
     <span><%= link_to comment.user.name, comment.user %></span>
     <span><%= comment.created_at.to_s(:datetime_jp) %></span>
-    <% if user_signed_in? && current_user.id == comment.user.id %>
+    <% if user_signed_in? && (current_user.id == comment.user.id || current_user.admin?) %>
       <span><%= link_to '削除', comment, method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' } %></span>
     <% end %>
   </div>
