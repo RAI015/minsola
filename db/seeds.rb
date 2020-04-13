@@ -25,7 +25,8 @@ User.create!(name:  "Guest User",
             password:              "12345678",
             password_confirmation: "12345678",
             confirmed_at: Time.zone.now,
-            confirmation_sent_at: Time.zone.now)
+            confirmation_sent_at: Time.zone.now,
+            guest: true)
 
 # ユーザー作成
 1.upto(49) do |i|
@@ -107,7 +108,7 @@ CSV.foreach('db/csv/caption2.csv') do |row|
 end
 
 # コメント
-CSV.foreach('db/csv/comment.csv') do |row|
+CSV.foreach('db/csv/comment2.csv') do |row|
   user_id = row[0]
   post_id = row[1]
   comment = row[2]
@@ -122,6 +123,20 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# 管理ユーザー作成
+admin = User.create!(name:  "Admin User",
+  email: "admin@example.com",
+  password:              "12345678",
+  password_confirmation: "12345678",
+  confirmed_at: Time.zone.now,
+  confirmation_sent_at: Time.zone.now,
+  admin: true)
+
+admin.avatar = open("#{Rails.root}/db/fixtures/avatar/Admin.png")
+admin.profile = 'このアカウントは管理者アカウントです。'
+admin.save
+
 
 # i = 0
 # 50.times do

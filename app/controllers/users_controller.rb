@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_target_user
+  before_action :admin_user, only: :destroy
+  before_action :set_target_user, only: %i[show edit update destroy]
+
+  def index
+    @users = User.page(params[:page]).per(24)
+  end
 
   def show
     @posts = Post.where(user_id: @user.id).order(created_at: :DESC)
@@ -31,6 +36,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+    flash[:success] = "ユーザー「#{@user.name}」は正常に削除されました"
+    redirect_to users_path
+  end
+
   def like_posts; end
 
   private
@@ -41,5 +52,9 @@ class UsersController < ApplicationController
 
   def set_target_user
     @user = User.find(params[:id])
+  end
+
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
   end
 end

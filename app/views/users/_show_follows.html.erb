@@ -9,7 +9,7 @@
         <% end %>
         <%= link_to user.name, user, class: 'user-name' %>
 
-        <% if user_signed_in? %>
+        <% if user_signed_in? && !(current_user.admin?) %>
           <%= render 'follow_area', user: user %>
         <% end %>
       </div>
