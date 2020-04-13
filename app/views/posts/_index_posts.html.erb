@@ -1,0 +1,21 @@
+<div class="row post-cards">
+  <% posts.each do |post| %>
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-index">
+        <div class="card-header" >
+          <div class="post-user">
+            <%= link_to image_tag(post.user.avatar.to_s, class: 'user_avatar'), post.user, class: 'mr-2' %>
+            <%= link_to post.user.name, post.user %>
+          </div>
+          <div class="post-info">
+            <small><%= set_address(post.prefecture.name, post.city.name) %></small><br>
+            <small><%= post.created_at.to_s(:datetime_jp) %></small>
+          </div>
+        </div>
+        <%= link_to image_tag(post.image.to_s, class: 'weather_image_index', alt: 'Weather image'), post %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate posts %>

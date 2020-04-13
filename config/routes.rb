@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'posts#index'
+  get 'posts/popular', to: 'posts#popular'
   resources :posts do
     collection do
       get :cities_select

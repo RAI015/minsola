@@ -15,7 +15,9 @@
       <%= render @post %>
     </div>
     <div class="col-md-6">
-      <%= render partial: 'comments/form', locals: { comment: @comment } %>
+      <% if user_signed_in? %>
+        <%= render partial: 'comments/form', locals: { comment: @comment } %>
+      <% end %>
       <% if @post.comments.count > 0 %>
         <div class="p-comment__list">
           <div class="p-comment_listTitle">コメント</div>
