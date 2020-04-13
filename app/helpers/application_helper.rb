@@ -19,6 +19,13 @@ module ApplicationHelper
     end
   end
 
+  def nav_link_add_active(name, path)
+    class_name = 'nav-link nav-item'
+    class_name << ' active' if current_page?(path)
+
+    link_to name, path, class: class_name
+  end
+
   def set_address(prefecture, city)
     "#{prefecture} #{city}"
   end

@@ -9,6 +9,10 @@ class PostsController < ApplicationController
     @posts = Post.page(params[:page]).per(12).order('created_at DESC')
   end
 
+  def popular
+    @popular_posts = Post.unscoped.joins(:likes).group(:post_id).order(Arel.sql('count(likes.user_id) desc')).page(params[:page]).per(12)
+  end
+
   def new
     @post = Post.new(flash[:post])
   end
