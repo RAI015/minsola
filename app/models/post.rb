@@ -38,7 +38,11 @@ class Post < ApplicationRecord
 
   mount_uploader :image, ImageUploader
   validates :caption, presence: true, length: { maximum: 300 }
+  validates :image, presence: true
   validate :image_size
+  validates :weather, presence: true
+  validates :feeling, presence: true
+  validates :expectation, presence: true
 
   def liked_by?(user)
     likes.where(user_id: user.id).exists?

@@ -13,7 +13,7 @@
       </div>
       <div class="col-md-6">
         <%= f.label :caption, 'キャプション（３００文字以内）' %>
-        <%= f.text_area :caption, class: 'form-control', rows: 12, placeholder: '説明を入力してください。' %>
+        <%= f.text_area :caption, class: 'form-control', rows: 12, placeholder: '説明を入力してください' %>
       </div>
     </div>
     <div class='form-group row'>
@@ -35,20 +35,20 @@
       </div>
       <div class='col-md-6'>
         <%= f.label :weather, '天気（今の天気は？）' %>
-        <%= f.text_field :weather, class: 'form-control', placeholder: '快晴, 晴れ, 曇り, 雨, 雪 etc.' %>
+        <%= f.select :weather, options_for_select(@weathers, post[:weather]), { prompt: '選択してください' }, { class: 'form-control' } %>
       </div>
     </div>
     <div class='form-group row'>
       <div class="col-md-6">
         <%= f.label :feeling, '体感（今の体感は？）' %>
-        <%= f.text_field :feeling, class: 'form-control', placeholder: '暑い, 暖かい, ちょうどいい, 寒い, あてはまらない etc.' %>
+        <%= f.select :feeling, options_for_select(@feelings, post[:feeling]), { prompt: '選択してください' }, { class: 'form-control' } %>
       </div>
       <div class='col-md-6'>
         <%= f.label :expectation, '予想（数時間後は？）' %>
-        <%= f.text_field :expectation, class: 'form-control', placeholder: '今と変化なさそう, 回復しそう, 下り坂になりそう etc.' %>
+        <%= f.select :expectation, options_for_select(@expectations, post[:expectation]), { prompt: '選択してください' }, { class: 'form-control' } %>
       </div>
     </div>
-    <%= submit_tag '投稿する', class: 'btn btn-primary mb-3' %>
+    <%= submit_tag form_button, class: 'btn btn-primary mb-3' %>
   <% end %>
 </div>
 

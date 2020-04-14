@@ -9,7 +9,7 @@ ja:
       post:
         caption: キャプション
         image: 画像
-        wheather: 天気
+        weather: 天気
         feeling: 体感
         expectation: 予想
         prefecture: 都道府県

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
-  before_action :set_form_title, only: %i[new edit]
+  before_action :set_form_title_button, only: %i[new edit]
+  before_action :set_weathers, :set_feelings, :set_expectations, only: %i[new edit]
 
   def index
     # @posts = Post.all
@@ -59,6 +60,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def set_weathers
+    @weathers = WEATHERS
+  end
+
+  def set_feelings
+    @feelings = FEELINGS
+  end
+
+  def set_expectations
+    @expectations = EXPECTATIONS
+  end
+
   private
 
   def post_params
@@ -69,9 +82,13 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def set_form_title
-    @form_title = params['action'] == 'new' ? '新しい投稿' : '投稿を編集'
-    # new: 新しい投稿
-    # edit: 編集
+  def set_form_title_button
+    if params['action'] == 'new'
+      @form_title = '新しい投稿'
+      @form_button = '投稿する'
+    else
+      @form_title = '投稿を編集'
+      @form_button = '更新する'
+    end
   end
 end
