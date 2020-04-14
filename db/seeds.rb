@@ -49,9 +49,9 @@ users.each_with_index do |user, i|
 end
 
 # Post作成
-wheathers = %w[快晴 晴れ 薄曇り 曇り 煙霧 砂じんあらし 地ふぶき 霧 霧雨 雨 みぞれ 雪 あられ ひょう 雷]
-feelings = %w[暑い 暖かい ちょうどいい 寒い あてはまらない]
-expectations = %w[今と変化なさそう 回復しそう 下り坂になりそう]
+# weathers = %w[快晴 晴れ 薄曇り 曇り 雨 豪雨 雷 みぞれ 雪 大雪 あられ ひょう 霧 霧雨 砂あらし]
+# feelings = %w[うだる暑さ 暑い 暖かい ちょうどいい 肌寒い 凍えるほど寒い あてはまらない]
+# expectations = %w[今と変化なさそう 回復しそう 下り坂になりそう]
 i = 0
 
 users.each do
@@ -62,9 +62,9 @@ users.each do
     j = ((i * 8) + j)
     image = open("#{Rails.root}/db/fixtures/sola/sola-#{j}.jpg")
     caption = Faker::TvShows::BojackHorseman.quote
-    weather = wheathers.sample
-    feeling = feelings.sample
-    expectation = expectations.sample
+    weather = ApplicationHelper::WEATHERS.sample
+    feeling = ApplicationHelper::FEELINGS.sample
+    expectation = ApplicationHelper::EXPECTATIONS.sample
     prefecture_id = cities.prefecture_id
     city_id = cities.id
 
