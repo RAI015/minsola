@@ -10,8 +10,8 @@ class UsersController < ApplicationController
     @posts = Post.where(user_id: @user.id).order(created_at: :DESC)
     @like_posts = @user.like_posts
 
-    # @posts = @posts.page(params[:page]).per(12)
-    # @like_posts = @user.like_posts.page(params[:page]).per(12)
+    # @posts = @posts.page(params[:page]).per(PER)
+    # @like_posts = @user.like_posts.page(params[:page]).per(PER)
 
     # respond_to do |format|
     #   format.html

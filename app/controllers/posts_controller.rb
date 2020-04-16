@@ -1,17 +1,64 @@
 class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
   before_action :set_form_title_button, only: %i[new edit]
-  before_action :set_weathers, :set_feelings, :set_expectations, only: %i[new edit]
+  before_action :set_weathers, :set_feelings, :set_expectations, only: %i[new edit search]
+  before_action :search_params, only: :search
 
   def index
-    # @posts = Post.all
-    # @posts = Post.all.order(created_at: :DESC)
-    # @posts = Post.page(params[:page]).per(12)
-    @posts = Post.page(params[:page]).per(12).order('created_at DESC')
+    @posts = Post.page(params[:page]).per(PER).order('created_at DESC')
   end
 
   def popular
-    @popular_posts = Post.unscoped.joins(:likes).group(:post_id).order(Arel.sql('count(likes.user_id) desc')).page(params[:page]).per(12)
+    @popular_posts = Post.unscoped.joins(:likes).group(:post_id).order(Arel.sql('count(likes.user_id) desc')).page(params[:page]).per(PER)
+  end
+
+  def search
+    return @search_posts = Post.page(params[:page]).per(PER).order('created_at DESC') if params[:commit].nil?
+
+    columns = []
+    values = []
+    query = []
+    posts_where = Post.new
+
+    unless @caption.nil? || @caption.empty?
+      columns << CLMN_CAPTION
+      values << "%#{@caption}%"
+    end
+    unless @prefecture_id.nil? || @prefecture_id.empty?
+      columns << CLMN_PREFECTURE
+      values << @prefecture_id
+    end
+    unless @city_id.nil? || @city_id.empty?
+      columns << CLMN_CITY
+      values << @city_id
+    end
+    unless @weather.nil? || @weather.empty?
+      columns << CLMN_WEATHER
+      values << @weather
+    end
+
+    columns.each do |column|
+      query << if column == CLMN_CAPTION
+                 "#{column} LIKE ?"
+               else
+                 "#{column} = ?"
+               end
+    end
+
+    values.count.times do |index|
+      posts_where = if index.zero?
+                      Post.where(query[index], values[index])
+                    else
+                      posts_where.where(query[index], values[index])
+                    end
+    end
+
+    @search_posts =
+      if columns.empty?
+        Post.none
+      else
+        posts_where.page(params[:page]).per(PER).order('created_at DESC')
+      end
   end
 
   def new
@@ -21,7 +68,7 @@ class PostsController < ApplicationController
   def create
     post = current_user.posts.build(post_params)
     if post.save
-      flash[:success] = "「#{set_address(post.prefecture.name, post.city.name)}」の記事を作成しました"
+      flash[:success] = "「#{set_address(post.prefecture.name, post.city.name)}」の記事を投稿しました"
       redirect_to root_path
     else
       redirect_to new_post_path, flash: {
@@ -55,9 +102,7 @@ class PostsController < ApplicationController
   end
 
   def cities_select
-    if request.xhr?
-      render partial: 'cities', locals: { prefecture_id: params[:prefecture_id] }
-    end
+    render partial: 'cities', locals: { prefecture_id: params[:prefecture_id] } if request.xhr?
   end
 
   def set_weathers
@@ -90,5 +135,12 @@ class PostsController < ApplicationController
       @form_title = '投稿を編集'
       @form_button = '更新する'
     end
+  end
+
+  def search_params
+    @caption = params[:caption]
+    @prefecture_id = params[:prefecture_id]
+    @city_id = params[:post][:city_id] unless params[:post].nil?
+    @weather = params[:weather]
   end
 end
