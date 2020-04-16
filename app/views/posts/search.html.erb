@@ -1,23 +1,22 @@
 <div class="container mt-4 search-form">
-  <%= form_with url: search_posts_path, method: :get, local: true do |f| %>
+  <%= form_with(scope: :post, url: search_posts_path, method: :get, local: true) do |f| %>
   <div class="row">
     <div class="form-group col-lg-4">
       <%= f.label :caption, 'キャプション' %>
-      <%= f.search_field :caption, class: 'form-control', placeholder: '説明を入力してください', value: @caption %>
+      <%= f.search_field :caption, class: 'form-control', placeholder: '説明を入力してください', value: @search_params[:caption] %>
     </div>
 
     <div class="form-group col-lg-5">
       <table>
         <tr>
           <td style="width: 45%;">
-            <%= f.label 'post_prefecture_id', '都道府県' %>
-            <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, { include_blank: '選択してください', selected: @prefecture_id }, { class: "form-control input-sm", id: 'post_prefecture_id' }) %>
+            <%= f.label :prefecture_id, '都道府県' %>
+            <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, { include_blank: '選択してください', selected: @search_params[:prefecture_id] }, { class: "form-control" }) %>
           </td>
           <td style="width: 55%; padding-left: 10px;">
             <div id="cities_select">
-              <label for="post_city_id">市区町村</label>
-              <%= collection_select(:post, :city_id, City.where(prefecture_id: @prefecture_id), :id, :name,  { include_blank: '選択してください', selected: @city_id }, { class: "form-control" }) %>
-              <%# <%= render partial: 'cities', locals: { prefecture_id: @prefecture_id } %>
+              <%= f.label :city_id, '市区町村' %>
+              <%= f.collection_select(:city_id, City.where(prefecture_id: @search_params[:prefecture_id]), :id, :name, { include_blank: '選択してください', selected: @search_params[:city_id] }, { class: "form-control" }) %>
             </div>
           </td>
         </tr>
@@ -25,7 +24,7 @@
     </div>
     <div class="form-group col-lg-3">
       <%= f.label :weather, '天気' %>
-      <%= f.select :weather, @weathers, { include_blank: '選択してください', selected: @weather }, { class: 'form-control' } %>
+      <%= f.select :weather, @weathers, { include_blank: '選択してください', selected: @search_params[:weather] }, { class: 'form-control' } %>
     </div>
     <div class="d-flex justify-content-center col-4 ml-auto">
       <%= f.submit '検索する', class: 'btn btn-primary form-control' %>
@@ -44,10 +43,10 @@
 
 <script type="text/javascript">
   $(function() {
-      $("#button-reset").click(function(){
-          $(".search-form input[type=search], .search-form select").each(function(){
-            $(this).val("");
-          });
+    $("#button-reset").click(function(){
+      $(".search-form input[type=search], .search-form select").each(function(){
+        $(this).val("");
       });
+    });
   });
 </script>
