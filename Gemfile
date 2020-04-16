@@ -53,6 +53,7 @@ group :development do
 
   # ----- 以下追加 -----
   gem 'annotate'
+  gem 'bullet'
   gem 'pry-byebug'
   gem 'rails-flog', require: 'flog'
   gem 'rubocop', require: false

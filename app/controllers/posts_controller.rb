@@ -6,14 +6,16 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.page(params[:page]).per(PER).order('created_at DESC')
+    @posts = @posts.includes(:user, :prefecture, :city)
   end
 
   def popular
     @popular_posts = Post.unscoped.joins(:likes).group(:post_id).order(Arel.sql('count(likes.user_id) desc')).page(params[:page]).per(PER)
+    @popular_posts = @popular_posts.includes(:user, :prefecture, :city)
   end
 
   def search
-    return @search_posts = Post.page(params[:page]).per(PER).order('created_at DESC') if params[:commit].nil?
+    return @search_posts = Post.page(params[:page]).per(PER).order('created_at DESC').includes(:user, :prefecture, :city) if params[:commit].nil?
 
     columns = []
     values = []
@@ -57,7 +59,7 @@ class PostsController < ApplicationController
       if columns.empty?
         Post.none
       else
-        posts_where.page(params[:page]).per(PER).order('created_at DESC')
+        posts_where.page(params[:page]).per(PER).order('created_at DESC').includes(:user, :prefecture, :city)
       end
   end
 

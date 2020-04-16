@@ -7,8 +7,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = Post.where(user_id: @user.id).order(created_at: :DESC)
-    @like_posts = @user.like_posts
+    @posts = Post.where(user_id: @user.id).order(created_at: :DESC).includes(:prefecture, :city)
+    @like_posts = @user.like_posts.includes(:prefecture, :city)
 
     # @posts = @posts.page(params[:page]).per(PER)
     # @like_posts = @user.like_posts.page(params[:page]).per(PER)
