@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  # get 'posts/popular', to: 'posts#popular'
-  # get 'posts/search', to: 'posts#search'
+
   resources :posts do
     collection do
       get :cities_select
@@ -11,7 +10,9 @@ Rails.application.routes.draw do
 
     resource :likes, only: %i[create destroy]
   end
+
   resources :comments, only: %i[create destroy]
+
   resources :users, only: %i[index show edit update destroy] do
     resource :relationships, only: %i[create destroy]
     member do
@@ -31,7 +32,4 @@ Rails.application.routes.draw do
     get 'login', to: 'users/sessions#new'
     get 'logout', to: 'users/sessions#destroy'
   end
-
-  # resources :likes, only: %i[create destroy]
-
 end

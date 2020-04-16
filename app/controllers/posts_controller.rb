@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
   before_action :set_form_title_button, only: %i[new edit]
   before_action :set_weathers, :set_feelings, :set_expectations, only: %i[new edit search]
-  before_action :search_params, only: :search
 
   def index
     @posts = Post.page(params[:page]).per(PER).order('created_at DESC')
@@ -15,52 +14,8 @@ class PostsController < ApplicationController
   end
 
   def search
-    return @search_posts = Post.page(params[:page]).per(PER).order('created_at DESC').includes(:user, :prefecture, :city) if params[:commit].nil?
-
-    columns = []
-    values = []
-    query = []
-    posts_where = Post.new
-
-    unless @caption.nil? || @caption.empty?
-      columns << CLMN_CAPTION
-      values << "%#{@caption}%"
-    end
-    unless @prefecture_id.nil? || @prefecture_id.empty?
-      columns << CLMN_PREFECTURE
-      values << @prefecture_id
-    end
-    unless @city_id.nil? || @city_id.empty?
-      columns << CLMN_CITY
-      values << @city_id
-    end
-    unless @weather.nil? || @weather.empty?
-      columns << CLMN_WEATHER
-      values << @weather
-    end
-
-    columns.each do |column|
-      query << if column == CLMN_CAPTION
-                 "#{column} LIKE ?"
-               else
-                 "#{column} = ?"
-               end
-    end
-
-    values.count.times do |index|
-      posts_where = if index.zero?
-                      Post.where(query[index], values[index])
-                    else
-                      posts_where.where(query[index], values[index])
-                    end
-    end
-
-    @search_posts =
-      if columns.empty?
-        Post.none
-      else
-        posts_where.page(params[:page]).per(PER).order('created_at DESC').includes(:user, :prefecture, :city)
-      end
+    @search_params = post_search_params
+    @search_posts = Post.search(@search_params).page(params[:page]).per(PER).order('created_at DESC').includes(:user, :prefecture, :city)
   end
 
   def new
@@ -139,10 +94,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def search_params
-    @caption = params[:caption]
-    @prefecture_id = params[:prefecture_id]
-    @city_id = params[:post][:city_id] unless params[:post].nil?
-    @weather = params[:weather]
+  def post_search_params
+    params.fetch(:post, {}).permit(:caption, :prefecture_id, :city_id, :weather)
   end
 end
