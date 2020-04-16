@@ -7,8 +7,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-    <% if user_signed_in? %>
-      <% if current_user.admin? %>
+      <% if user_signed_in? && current_user.admin?  %>
         <li class="nav-item">
           <%= header_link_item(icon('fas', 'users') + ' すべてのユーザー', users_path) %>
         </li>
@@ -17,30 +16,30 @@
         <%= header_link_item(icon('fas', 'th') + ' 投稿一覧', root_path) %>
       </li>
       <li class="nav-item">
-        <%= header_link_item(icon('fas', 'edit') + ' 新規投稿', new_post_path) %>
+        <%= header_link_item(icon('fas', 'search') + ' 検索', search_posts_path) %>
       </li>
-      <li class="nav-item dropdown">
-        <%= link_to icon('fas', 'user') + " #{current_user.name}さん", '#', class: "nav-link dropdown-toggle", id: "navbarDropdown", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } %>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to icon('fas', 'user') + ' マイページ', user_path(current_user), class: 'dropdown-item' %>
-          <%= link_to icon('fas', 'sign-out-alt') + ' ログアウト', logout_path, class: 'dropdown-item' %>
-        </div>
-      </li>
-    <% else %>
-      <li class="nav-item">
-        <%= header_link_item(icon('fas', 'th') + ' 投稿一覧', root_path) %>
-      </li>
-      <li class="nav-item">
-        <%= header_link_item(icon('fas', 'sign-in-alt') + ' ログイン', login_path) %>
-      </li>
-      <li class="nav-item">
-        <%= header_link_item(icon('fas', 'user-plus') + ' 新規登録', signup_path) %>
-      </li>
-    <% end %>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="キーワードで検索" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
-    </form>
+
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= header_link_item(icon('fas', 'edit') + ' 新規投稿', new_post_path) %>
+        </li>
+        <li class="nav-item dropdown">
+          <%= link_to icon('fas', 'user') + " #{current_user.name}さん", '#', class: "nav-link dropdown-toggle", id: "navbarDropdown", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } %>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to icon('fas', 'user') + ' マイページ', user_path(current_user), class: 'dropdown-item' %>
+            <%= link_to icon('fas', 'sign-out-alt') + ' ログアウト', logout_path, class: 'dropdown-item' %>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= header_link_item(icon('fas', 'user-plus') + ' 新規登録', signup_path) %>
+        </li>
+        <li class="nav-item">
+          <%= header_link_item(icon('fas', 'sign-in-alt') + ' ログイン', login_path) %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </nav>

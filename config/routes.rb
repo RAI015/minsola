@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  get 'posts/popular', to: 'posts#popular'
+  # get 'posts/popular', to: 'posts#popular'
+  # get 'posts/search', to: 'posts#search'
   resources :posts do
     collection do
       get :cities_select
+      get :popular
+      get :search
     end
 
     resource :likes, only: %i[create destroy]

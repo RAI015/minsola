@@ -48,7 +48,7 @@
         <%= f.select :expectation, options_for_select(@expectations, post[:expectation]), { prompt: '選択してください' }, { class: 'form-control' } %>
       </div>
     </div>
-    <%= submit_tag form_button, class: 'btn btn-primary mb-3' %>
+    <%= f.submit form_button, class: 'btn btn-primary mb-3' %>
   <% end %>
 </div>
 
