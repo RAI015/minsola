@@ -1,15 +1,8 @@
 <% provide :title, set_address(@post.prefecture.name, @post.city.name) %>
 
-<% if flash[:success] %>
-  <div class="alert alert-primary"><%= flash[:success] %></div>
-<% end %>
+<%= render "shared/success_messages" %>
 
-<div class="d-flex align-items-center mt-4 mb-4">
-  <div class="ml-auto posts__linkBox">
-  </div>
-</div>
-
-<div class="container mb-3">
+<div class="container pt-4 pb-3">
   <div class="row">
     <div class="col-md-6">
       <%= render @post %>
@@ -21,7 +14,7 @@
       <% if @post.comments.any? %>
         <div class="p-comment__list">
           <div class="p-comment_listTitle">コメント</div>
-          <%= render @post.comments %>
+          <%= render @post.comments.includes(:user) %>
         </div>
       <% end %>
     </div>

@@ -6,6 +6,8 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+        avatar: アバター
+        profile: 自己紹介
       post:
         caption: キャプション
         image: 画像

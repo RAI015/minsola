@@ -1,6 +1,11 @@
 <div class="container post_form">
   <%= render "shared/error_messages" %>
-  <h2 class="form_title"><%= form_title %></h2>
+  <div class="d-flex align-items-center">
+    <h2 class="form_title"><%= form_title %></h2>
+    <% if params[:action] == 'edit' %>
+      <%= link_to '戻る', :back, class:'btn btn-outline-dark ml-auto' %>
+    <% end%>
+  </div>
   <%= form_with model: post do |f| %>
     <div class="form-group row">
       <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', class: 'custom-file-input' %>
@@ -48,11 +53,13 @@
         <%= f.select :expectation, options_for_select(@expectations, post[:expectation]), { prompt: '選択してください' }, { class: 'form-control' } %>
       </div>
     </div>
-    <%= f.submit form_button, class: 'btn btn-primary mb-3' %>
+    <div class="row">
+      <div class="d-flex justify-content-center col-lg-4 col-md-6 mx-auto mb-3">
+        <%= f.submit form_button, class: 'btn btn-primary form-control' %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-
 
 <script type="text/javascript">
   $('#post_image').bind('change', function() {
@@ -62,10 +69,9 @@
     }
   });
 
-
+  // 画像プレビューを表示
   $(function(){
     $fileField = $('#post_image')
-    // 選択された画像を取得し表示
     $($fileField).on('change', $fileField, function(e) {
       file = e.target.files[0]
       reader = new FileReader(),
@@ -76,7 +82,6 @@
           $preview.empty();
           $preview.append($('<img>').attr({
             src: e.target.result,
-            // width: "100%",
             class: "preview",
             title: file.name
           }));

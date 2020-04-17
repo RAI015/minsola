@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+# Prefectureセレクトボックスに連動してCityセレクトボックスを変更する
 $(document).on 'change', '#post_prefecture_id', ->
   $.ajax(
     type: 'GET'

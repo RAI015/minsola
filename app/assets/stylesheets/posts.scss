@@ -4,15 +4,11 @@
   margin-bottom: 5px;
 }
 .card-index {
-  // height: 360px;
   margin: 14px 0;
 }
 
 .weather_image_index {
   width: 100%;
-
-  // max-width: 100%;
-  // height: 240px;
 }
 
 .weather_image_post {
@@ -24,23 +20,9 @@
 .card-post {
   max-width: 600px;
 }
-.card-info {
-
-  a {
-    // display: block;
-  }
-}
-
-// .card-body p {
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   white-space: nowrap;
-// }
-
 
 .add_image {
   border: black 4px dashed;
-  // width: 480px;
   width: 100%;
   height: 500px;
   line-height: 550px;
@@ -57,10 +39,6 @@
 .custom-file-input {
   height: 0;
 }
-
-
-
-
 
 #img_field {
   color: #666;
@@ -127,8 +105,7 @@
   }
 }
 
-
-
+/* 隠し表示用 */
 div.PhotoBox {
   position: relative;
   overflow: hidden;

@@ -4,9 +4,9 @@
   <div class="row mx-auto" style="max-width: 700px;">
     <div class="pr-5 col-sm-5">
       <% if @user.avatar? %>
-        <%= image_tag(@user.avatar.to_s, size: "250x250", class: "rounded-circle", alt: "avatar image") %>
+        <%= image_tag(@user.avatar.to_s, size: '250x250', class: 'rounded-circle', alt: 'avatar image') %>
       <% else %>
-        <%= image_tag("no-avatar.png", size: "250x250", class: "rounded-circle", alt: "avatar image") %>
+        <%= image_tag('no-avatar.png', size: '250x250', class: 'rounded-circle', alt: 'avatar image') %>
       <% end %>
     </div>
     <div class="d-flex flex-column mt-3 col-sm-7">
@@ -110,23 +110,3 @@
     </div>
   </div>
 </div>
-
-<%# <script type="text/javascript">
-  $(function(){
-    $(".PhotoBox").hover(function(){
-      $(".SlideBox",this).stop().animate({bottom:"0px"},"fast");
-    },function(){
-      $(".SlideBox",this).stop().animate({bottom:"-70px"},"slow");
-    });
-  })
-
-
-  $("ul.pagination a.page-link").click(function(){
-    if($("ul.nav-tabs a#items1-tab").selected == true) {
-      $("ul.nav-tabs a#items1-tab").selected = true;
-    }
-    if($("ul.nav-tabs a#items4-tab").selected == true) {
-      $("ul.nav-tabs a#items4-tab").selected = true;
-    }
-  })
-</script> %>

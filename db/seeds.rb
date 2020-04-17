@@ -20,25 +20,25 @@ CSV.foreach('db/csv/prefectures_cities.csv') do |row|
 end
 
 # ゲストユーザー作成
-User.create!(name:  "Guest User",
-            email: "guest@example.com",
-            password:              "12345678",
-            password_confirmation: "12345678",
-            confirmed_at: Time.zone.now,
-            confirmation_sent_at: Time.zone.now,
-            guest: true)
+User.create!(name: 'Guest User',
+             email: 'guest@example.com',
+             password: '12345678',
+             password_confirmation: '12345678',
+             confirmed_at: Time.zone.now,
+             confirmation_sent_at: Time.zone.now,
+             guest: true)
 
 # ユーザー作成
 1.upto(49) do |i|
   name  = Faker::Name.name
   email = "sample-#{i}@example.com"
-  password = "password"
-  User.create!(name:  name,
-              email: email,
-              password:              password,
-              password_confirmation: password,
-              confirmed_at: Time.zone.now,
-              confirmation_sent_at: Time.zone.now)
+  password = 'password'
+  User.create!(name: name,
+               email: email,
+               password: password,
+               password_confirmation: password,
+               confirmed_at: Time.zone.now,
+               confirmation_sent_at: Time.zone.now)
 end
 
 # ユーザーAvatar生成
@@ -49,9 +49,6 @@ users.each_with_index do |user, i|
 end
 
 # Post作成
-# weathers = %w[快晴 晴れ 薄曇り 曇り 雨 豪雨 雷 みぞれ 雪 大雪 あられ ひょう 霧 霧雨 砂あらし]
-# feelings = %w[うだる暑さ 暑い 暖かい ちょうどいい 肌寒い 凍えるほど寒い あてはまらない]
-# expectations = %w[今と変化なさそう 回復しそう 下り坂になりそう]
 i = 0
 
 users.each do
@@ -100,7 +97,7 @@ CSV.foreach('db/csv/profile.csv') do |row|
 end
 
 # 記事のキャプション
-CSV.foreach('db/csv/caption2.csv') do |row|
+CSV.foreach('db/csv/caption.csv') do |row|
   post_id = row[0]
   caption = row[1]
 
@@ -108,7 +105,7 @@ CSV.foreach('db/csv/caption2.csv') do |row|
 end
 
 # コメント
-CSV.foreach('db/csv/comment2.csv') do |row|
+CSV.foreach('db/csv/comment.csv') do |row|
   user_id = row[0]
   post_id = row[1]
   comment = row[2]
@@ -118,49 +115,23 @@ end
 
 # リレーションシップ
 users = User.all
-user  = users.first
-following = users[2..50]
-followers = users[3..40]
-following.each { |followed| user.follow(followed) }
-followers.each { |follower| follower.follow(user) }
+user_array = [users.find(1), users.find(2), users.find(3), users.find(4), users.find(5)]
+user_array.each_with_index do |user, index|
+  following = users[index + 2..index + 40]
+  followers = users[index + 3..index + 30]
+  following.each { |followed| user.follow(followed) }
+  followers.each { |follower| follower.follow(user) }
+end
 
 # 管理ユーザー作成
-admin = User.create!(name:  "Admin User",
-  email: "admin@example.com",
-  password:              "12345678",
-  password_confirmation: "12345678",
-  confirmed_at: Time.zone.now,
-  confirmation_sent_at: Time.zone.now,
-  admin: true)
+admin = User.create!(name: 'Admin User',
+                     email: 'admin@example.com',
+                     password: '12345678',
+                     password_confirmation: '12345678',
+                     confirmed_at: Time.zone.now,
+                     confirmation_sent_at: Time.zone.now,
+                     admin: true)
 
 admin.avatar = open("#{Rails.root}/db/fixtures/avatar/Admin.png")
 admin.profile = 'このアカウントは管理者アカウントです。'
 admin.save
-
-
-# i = 0
-# 50.times do
-#   i += 1
-#   title = Faker::Address.state + 'の天気'
-#   body = Faker::Lorem.paragraph_by_chars
-#   image = open("#{Rails.root}/db/fixtures/sola/sola-#{i}.jpg")
-#   users.each { |user| user.posts.create!(title: title, body: body, image: image) }
-# end
-
-# wheathers %w['快晴' '晴れ' '薄曇り' '曇り' '煙霧' '砂じんあらし' '地ふぶき' '霧' '霧雨' '雨' 'みぞれ' '雪' 'あられ' 'ひょう' '雷']
-# 天気の種類
-# （１）快晴
-# （２）晴れ
-# （３）薄曇り
-# （４）曇り
-# （５）煙霧
-# （６）砂じんあらし
-# （７）地ふぶき
-# （８）霧
-# （９）霧雨
-# （１０）雨
-# （１１）みぞれ
-# （１２）雪
-# （１３）あられ
-# （１４）ひょう
-# （１５）雷
