@@ -27,15 +27,16 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
+  mount_uploader :image, ImageUploader
   belongs_to :user
   has_many :comments, dependent: :destroy
   belongs_to :prefecture
   belongs_to :city
-
   # お気に入り機能用中間テーブル
-  has_many :likes, foreign_key: 'post_id', dependent: :destroy
+  has_many :likes, dependent: :destroy
 
-  mount_uploader :image, ImageUploader
+  default_scope -> { order(created_at: :DESC) }
+
   validates :caption, presence: true, length: { maximum: 300 }
   validates :image, presence: true
   validate :image_size
@@ -43,10 +44,12 @@ class Post < ApplicationRecord
   validates :feeling, presence: true
   validates :expectation, presence: true
 
+  # お気に入りされているか判定
   def liked_by?(user)
     likes.where(user_id: user.id).exists?
   end
 
+  # 検索機能
   scope :search, ->(search_params) do
     return if search_params.blank?
 

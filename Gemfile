@@ -38,15 +38,15 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # ----- 以下追加 -----
+  gem 'factory_bot_rails', '~> 4.10.0'
   gem 'faker', '~> 2.8'
   gem 'rspec-rails', '~> 4.0.0.beta'
-  gem 'factory_bot_rails', '~> 4.10.0'
 end
 
 group :development do
+  gem 'listen', '>= 3.0.5', '< 3.2'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -76,14 +76,14 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # ----- 以下追加 -----
+gem 'bootstrap', '>= 4.3.1'
+gem 'carrierwave', '~> 2.0'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-gem 'kaminari'
-gem 'rails-i18n'
 gem 'fog-aws'
-gem 'carrierwave', '~> 2.0'
-gem 'mini_magick', '~> 4.8'
 gem 'font-awesome-sass', '~> 5.4.1'
-gem "bootstrap", ">= 4.3.1"
 gem 'jquery-rails'
+gem 'kaminari'
+gem 'mini_magick', '~> 4.8'
+gem 'rails-i18n'

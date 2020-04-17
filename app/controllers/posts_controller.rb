@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create update destroy]
   before_action :set_target_post, only: %i[show edit update destroy]
   before_action :set_form_title_button, only: %i[new edit]
   before_action :set_weathers, :set_feelings, :set_expectations, only: %i[new edit search]
 
   def index
-    @posts = Post.page(params[:page]).per(PER).order('created_at DESC')
+    @posts = Post.page(params[:page]).per(PER)
     @posts = @posts.includes(:user, :prefecture, :city)
   end
 
@@ -15,7 +16,7 @@ class PostsController < ApplicationController
 
   def search
     @search_params = post_search_params
-    @search_posts = Post.search(@search_params).page(params[:page]).per(PER).order('created_at DESC').includes(:user, :prefecture, :city)
+    @search_posts = Post.search(@search_params).page(params[:page]).per(PER).includes(:user, :prefecture, :city)
   end
 
   def new
@@ -25,8 +26,7 @@ class PostsController < ApplicationController
   def create
     post = current_user.posts.build(post_params)
     if post.save
-      flash[:success] = "「#{set_address(post.prefecture.name, post.city.name)}」の記事を投稿しました"
-      redirect_to root_path
+      redirect_to root_path, flash: { success: "「#{set_address(post.prefecture.name, post.city.name)}」のレポートを投稿しました" }
     else
       redirect_to new_post_path, flash: {
         post: post,
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to root_path, flash: { success: "「#{set_address(@post.prefecture.name, @post.city.name)}」の記事が削除されました" }
+    redirect_to root_path, flash: { success: "「#{set_address(@post.prefecture.name, @post.city.name)}」のレポートが削除されました" }
   end
 
   def show
@@ -48,8 +48,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:success] = "「#{set_address(@post.prefecture.name, @post.city.name)}」の記事を編集しました"
-      redirect_to root_path
+      redirect_to root_path, flash: { success: "「#{set_address(@post.prefecture.name, @post.city.name)}」のレポートを編集しました" }
     else
       redirect_back fallback_location: root_path, flash: {
         user: @post,

@@ -22,15 +22,17 @@
       </div>
     <% end %>
 
-    <div class="actions">
-      <%= f.submit 'ログイン', class: 'btn btn-primary user_form_btn' %>
+    <div class="mb-3">
+      <%= f.submit 'ログイン', class: 'btn btn-primary' %>
     </div>
   <% end %>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |g| %>
     <%= g.hidden_field :email, value: 'guest@example.com' %>
     <%= g.hidden_field :password, value: '12345678' %>
-    <%= g.submit "かんたんログイン", class: 'btn btn-warning mb-3 user_form_btn' %>
+    <div class="mb-3">
+      <%= g.submit 'かんたんログイン', class: 'btn btn-warning' %>
+    </div>
   <% end %>
 
   <%= render "devise/shared/links" %>

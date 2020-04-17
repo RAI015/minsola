@@ -1,6 +1,7 @@
 module ApplicationHelper
   WEBSITE_NAME = 'Every-Weather'.freeze
 
+  # PostのSelectBoxを定義
   WEATHERS = %w[快晴 晴れ 薄曇り 曇り 小雨 雨 豪雨 雷 みぞれ 雪 大雪 あられ ひょう 霧 霧雨 砂あらし].freeze
   FEELINGS = %w[うだる暑さ 暑い 暖かい ちょうどいい 肌寒い 凍えるほど寒い あてはまらない].freeze
   EXPECTATIONS = %w[今と変化なさそう 回復しそう 下り坂になりそう].freeze

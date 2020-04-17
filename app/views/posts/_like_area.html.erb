@@ -1,17 +1,16 @@
 <div id="like_btn_<%= post.id %>">
   <% if current_user.id == post.user.id || current_user.admin? %>
     <%= link_to '', class: 'btn btn-cantlike' do %>
-      <%= "#{post.likes.count} いいね！"%><i class="far fa-heart"></i>
+      <%= "#{post.likes.count} いいね！ "%><i class="far fa-heart"></i>
     <% end %>
-
   <% else %>
     <% if post.liked_by?(current_user) %>
-      <%= link_to post_likes_path(post.id), method: :delete, remote: true, class: 'btn btn-like' do %>
-        <%= "#{post.likes.count} いいね！"%><i class="fas fa-heart"></i>
+      <%= link_to post_likes_path(post.id), method: :delete, remote: true, class: 'btn btn-unlike' do %>
+        <%= "#{post.likes.count} いいね済 "%><i class="fas fa-heart"></i>
       <% end %>
     <% else %>
       <%= link_to post_likes_path(post.id), method: :post, remote: true, class: 'btn btn-like' do %>
-        <%= "#{post.likes.count} いいね！"%><i class="far fa-heart"></i>
+        <%= "#{post.likes.count} いいね！ "%><i class="far fa-heart"></i>
       <% end %>
     <% end %>
   <% end %>

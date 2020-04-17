@@ -27,10 +27,11 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable #, :confirmable
+         :recoverable, :rememberable, :validatable
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -45,8 +46,17 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: :follower_id, dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :following
 
-  mount_uploader :avatar, AvatarUploader
   validates :name, presence: true, length: { maximum: 10 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  before_validation { email.downcase! }
+  validates :email,
+            presence: true,
+            uniqueness: true,
+            length: { maximum: 255 },
+            format: {
+              with: VALID_EMAIL_REGEX
+            }
+  validates :profile, length: { maximum: 150 }
 
   # お気に入り追加
   def like(post)
@@ -70,12 +80,11 @@ class User < ApplicationRecord
 
   # ユーザーをフォロー解除する
   def unfollow(other_user)
-    active_relationships.find_by(followed_id: other_user.id).destroy
+    active_relationships.find_by(follower_id: other_user.id).destroy
   end
 
-  # フォローしているか判定
+  # フォローされているか判定
   def followed_by?(user)
     passive_relationships.find_by(following_id: user.id).present?
   end
-
 end

@@ -1,7 +1,11 @@
 <div class="card">
   <div class="card-header">
     <div class="post-user">
-      <%= link_to image_tag(post.user.avatar.to_s, class: 'user_avatar'), post.user, class: 'mr-2' %>
+      <% if post.user.avatar? %>
+        <%= link_to image_tag(post.user.avatar.to_s, class: 'user_avatar', alt: 'avatar image'), post.user, class: 'mr-2' %>
+      <% else %>
+        <%= link_to image_tag('no-avatar.png', class: 'user_avatar', alt: 'avatar image'), post.user, class: 'mr-2' %>
+      <% end %>
       <%= link_to post.user.name, post.user %>
     </div>
     <div class="post-info">

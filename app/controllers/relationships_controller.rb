@@ -1,16 +1,21 @@
 class RelationshipsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: %i[create destroy]
 
   def create
-    follow = current_user.active_relationships.build(follower_id: params[:user_id])
-    follow.save
-    # redirect_to user_path(params[:user_id])
+    current_user.follow(@user) unless @user.followed_by?(current_user)
+    respond_to do |format|
+      format.html { refirect_to @user }
+      format.js
+    end
   end
 
   def destroy
-    follow = current_user.active_relationships.find_by(follower_id: params[:user_id])
-    follow.destroy
-    # redirect_to user_path(params[:user_id])
+    current_user.unfollow(@user)
+    respond_to do |format|
+      format.html { refirect_to @user }
+      format.js
+    end
   end
 
   private
