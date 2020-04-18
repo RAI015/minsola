@@ -125,6 +125,48 @@ div.PhotoBox div.SlideBox p.Caption {
   font-size: 90%;
   margin: 0.5em;
 }
-div.SlideBox p{
+div.SlideBox p {
   padding-left: 5px;
+}
+
+/* 新規投稿ボタン */
+.new-post-btn {
+  &--pc {
+    position: fixed;
+    z-index: 1000;
+    border-radius: 50%;
+    background-color: #ffa600;
+    color: white;
+    text-align: center;
+    bottom: 32px;
+    right: 32px;
+    width: 160px;
+    height: 160px;
+    font-size: 22px;
+    padding-top: 64px;
+    &:hover {
+      text-decoration: none;
+      background-color: #ffa666;
+      color: white;
+    }
+  }
+  &--sp {
+    position: fixed;
+    z-index: 1000;
+    border-radius: 50%;
+    background-color: #ffa600;
+    color: white;
+    text-align: center;
+    bottom: 16px;
+    right: 16px;
+    width: 80px;
+    height: 80px;
+    font-size: 38px;
+    padding-top: 12px;
+    &:hover {
+      text-decoration: none;
+      background-color: #ffa666;
+      color: white;
+    }
+  }
 }
