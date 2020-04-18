@@ -244,6 +244,10 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.7.0)
+    rename (1.0.6)
+      activesupport
+      rails (>= 3.0.0)
+      thor (>= 0.19.1)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -375,6 +379,7 @@ DEPENDENCIES
   rails (= 5.2.4.2)
   rails-flog
   rails-i18n
+  rename
   rspec-rails (~> 4.0.0.beta)
   rspec_junit_formatter
   rubocop
