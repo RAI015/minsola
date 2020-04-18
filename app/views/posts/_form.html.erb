@@ -2,8 +2,10 @@
   <%= render "shared/error_messages" %>
   <div class="d-flex align-items-center">
     <h2 class="form_title"><%= form_title %></h2>
-    <% if params[:action] == 'edit' %>
-      <%= link_to '戻る', :back, class:'btn btn-outline-dark ml-auto' %>
+    <% if params[:action] == 'new' %>
+      <%= link_to '一覧', root_path, class:'btn btn-outline-dark ml-auto' %>
+    <% else %>
+      <%= link_to '戻る', post, class:'btn btn-outline-dark ml-auto' %>
     <% end%>
   </div>
   <%= form_with model: post do |f| %>
