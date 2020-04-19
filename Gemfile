@@ -40,6 +40,7 @@ group :development, :test do
   # ----- 以下追加 -----
   gem 'factory_bot_rails', '~> 4.10.0'
   gem 'faker', '~> 2.8'
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 4.0.0.beta'
 end
 
@@ -54,7 +55,6 @@ group :development do
   # ----- 以下追加 -----
   gem 'annotate'
   gem 'bullet'
-  gem 'pry-byebug'
   gem 'rails-flog', require: 'flog'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false

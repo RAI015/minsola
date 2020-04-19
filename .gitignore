@@ -31,3 +31,4 @@
 
 # Ignore uploaded Images
 /public/uploads
+/public/uploads_test

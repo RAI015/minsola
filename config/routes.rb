@@ -21,15 +21,34 @@ Rails.application.routes.draw do
       get :followers
     end
   end
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions',
-    passwords: 'users/passwords'
-  }
-
+  # devise_for :users, path: '', controllers: {
+  #   registrations: 'users/registrations',
+  #   sessions: 'users/sessions',
+  #   passwords: 'users/passwords'
+  # }
+  devise_for :users,
+             path: '',
+             path_names: {
+               sign_up: '',
+               sign_in: 'login',
+               sign_out: 'logout',
+               registration: 'signup'
+             },
+             controllers: {
+               registrations: 'users/registrations',
+               sessions: 'users/sessions',
+               passwords: 'users/passwords'
+             }
   devise_scope :user do
     get 'signup', to: 'users/registrations#new'
     get 'login', to: 'users/sessions#new'
     get 'logout', to: 'users/sessions#destroy'
   end
+
+  # devise_for :users, skip: [:sessions]
+  # as :user do
+  #   get 'login', to: 'users/sessions#new', as: :new_user_session
+  #   post 'login', to: 'users/sessions#create', as: :user_session
+  #   delete 'logout', to: 'users/sessions#destroy', as: :destroy_user_session
+  # end
 end
