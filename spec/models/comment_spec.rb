@@ -56,14 +56,25 @@ RSpec.describe Comment, type: :model do
   end
 
   describe '文字数の検証' do
-    it 'コメントが1000文字以内の場合、有効であること' do
-      comment.comment = 'a' * 1000
+    it 'コメントが150文字以内の場合、有効であること' do
+      comment.comment = 'a' * 150
       expect(comment).to be_valid
     end
 
-    it 'コメントが1001文字以上の場合、登録できないこと' do
-      comment.comment = 'a' * 1001
+    it 'コメントが151文字以上の場合、登録できないこと' do
+      comment.comment = 'a' * 151
       expect(comment).to_not be_valid
+    end
+  end
+
+  describe 'その他' do
+    it 'コメントが新しい順に並んでいること' do
+      post = FactoryBot.create(:post)
+      FactoryBot.create(:comment, post: post, created_at: 2.days.ago)
+      most_recent_comment = FactoryBot.create(:comment, post: post, created_at: Time.zone.now)
+      FactoryBot.create(:comment, post: post, created_at: 5.minutes.ago)
+
+      expect(most_recent_comment).to eq post.comments.first
     end
   end
 end

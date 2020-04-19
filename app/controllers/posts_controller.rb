@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create update destroy]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_target_post, only: %i[show edit update destroy]
+  before_action :correct_user, only: %i[edit update destroy]
   before_action :set_form_title_button, only: %i[new edit]
   before_action :set_weathers, :set_feelings, :set_expectations, only: %i[new edit search]
 
@@ -81,6 +82,10 @@ class PostsController < ApplicationController
 
   def set_target_post
     @post = Post.find(params[:id])
+  end
+
+  def correct_user
+    redirect_to(root_url) unless (@post.user == current_user) || current_user.admin?
   end
 
   def set_form_title_button
