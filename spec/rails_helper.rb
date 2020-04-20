@@ -6,6 +6,8 @@ require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/rspec'
+include ApplicationHelper
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -68,4 +70,11 @@ RSpec.configure do |config|
   config.after(:all) do
     FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"]) if Rails.env.test?
   end
+
+  # 強制的にCapybara::DSLを読み込む
+  config.include Capybara::DSL
+
+  # リクエストスペックとシステムスペックでDeviseのテストヘルパーを使用する
+  config.include RequestSpecHelper, type: :request
+  # config.include Devise::Test::IntegrationHelpers, type: :system
 end

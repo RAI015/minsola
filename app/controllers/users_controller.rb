@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :admin_user, only: :destroy
+  before_action :authenticate_user!, only: %i[index destroy]
+  before_action :admin_user, only: %i[index destroy]
   before_action :set_target_user, only: %i[show edit update destroy]
 
   def index
