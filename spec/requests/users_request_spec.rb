@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  let!(:user) { FactoryBot.create(:user) }
-  let!(:another_user) { FactoryBot.create(:user) }
-  let!(:admin) { FactoryBot.create(:user, :admin) }
+  let!(:user) { create(:user) }
+  let!(:another_user) { create(:user) }
+  let!(:admin) { create(:user, :admin) }
 
   describe '#index' do
     context '管理者ユーザーの場合' do

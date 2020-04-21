@@ -49,10 +49,10 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to root_path, flash: { success: "「#{set_address(@post.prefecture.name, @post.city.name)}」のレポートを編集しました" }
+      redirect_to @post, flash: { success: "「#{set_address(@post.prefecture.name, @post.city.name)}」のレポートを編集しました" }
     else
-      redirect_back fallback_location: root_path, flash: {
-        user: @post,
+      redirect_back fallback_location: @post, flash: {
+        post: @post,
         error_messages: @post.errors.full_messages
       }
     end

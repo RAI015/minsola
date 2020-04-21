@@ -30,11 +30,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user = FactoryBot.build(:user)
+    @user = build(:user)
   end
 
   it '有効なファクトリを持つこと' do
-    expect(FactoryBot.build(:user)).to be_valid
+    expect(build(:user)).to be_valid
   end
 
   it '名前、メール、パスワードがある場合、有効であること' do
@@ -112,14 +112,14 @@ RSpec.describe User, type: :model do
 
   describe '一意性の検証' do
     it '重複したメールアドレスの場合、無効であること' do
-      user1 = FactoryBot.create(:user, name: 'taro', email: 'taro@example.com')
-      user2 = FactoryBot.build(:user, name: 'ziro', email: user1.email)
+      user1 = create(:user, name: 'taro', email: 'taro@example.com')
+      user2 = build(:user, name: 'ziro', email: user1.email)
       expect(user2).to_not be_valid
     end
 
     it 'メールアドレスは大文字小文字を区別せず扱うこと' do
-      FactoryBot.create(:user, email: 'sample@example.com')
-      duplicate_user = FactoryBot.build(:user, email: 'SAMPLE@EXAMPLE.COM')
+      create(:user, email: 'sample@example.com')
+      duplicate_user = build(:user, email: 'SAMPLE@EXAMPLE.COM')
       duplicate_user.valid?
       expect(duplicate_user.errors).to be_added(:email, :taken, value: 'sample@example.com')
     end
@@ -133,7 +133,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'パスワードが暗号化されていること' do
-      user = FactoryBot.create(:user)
+      user = create(:user)
       expect(user.encrypted_password).to_not eq 'password'
     end
   end
@@ -161,8 +161,8 @@ RSpec.describe User, type: :model do
 
   describe 'メソッド' do
     it 'ユーザーをフォロー/フォロー解除できること' do
-      alice = FactoryBot.create(:user)
-      bob = FactoryBot.create(:user)
+      alice = create(:user)
+      bob = create(:user)
       expect(alice.followed_by?(bob)).to eq false
       bob.follow(alice)
       expect(alice.followed_by?(bob)).to eq true
@@ -179,34 +179,34 @@ RSpec.describe User, type: :model do
     end
 
     it 'ユーザーを削除すると、関連する投稿も削除されること' do
-      user = FactoryBot.create(:user, :with_posts, posts_count: 1)
+      user = create(:user, :with_posts, posts_count: 1)
       expect { user.destroy }.to change { Post.count }.by(-1)
     end
 
     it 'ユーザーを削除すると、関連するコメントも削除されること' do
-      user = FactoryBot.create(:user, :with_comments, comments_count: 1)
+      user = create(:user, :with_comments, comments_count: 1)
       expect { user.destroy }.to change { Comment.count }.by(-1)
     end
 
     it 'ユーザーを削除すると、関連するいいねも削除されること' do
-      user = FactoryBot.create(:user)
-      post = FactoryBot.create(:post)
+      user = create(:user)
+      post = create(:post)
       user.like(post)
       expect(post.liked_by?(user)).to eq true
       expect { user.destroy }.to change { user.like_posts.count }.by(-1)
     end
 
     it 'ユーザーを削除すると、フォローしているユーザーとの関係も削除されること' do
-      user = FactoryBot.create(:user)
-      following_user = FactoryBot.create(:user)
+      user = create(:user)
+      following_user = create(:user)
       user.follow(following_user)
       expect(following_user.followed_by?(user)).to eq true
       expect { user.destroy }.to change { following_user.followers.count }.by(-1)
     end
 
     it 'ユーザーを削除すると、フォロワーのユーザーとの関係も削除されること' do
-      user = FactoryBot.create(:user)
-      follower_user = FactoryBot.create(:user)
+      user = create(:user)
+      follower_user = create(:user)
       follower_user.follow(user)
       expect(user.followed_by?(follower_user)).to eq true
       expect { user.destroy }.to change { follower_user.followings.count }.by(-1)

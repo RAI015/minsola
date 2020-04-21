@@ -22,11 +22,11 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  let(:comment) { FactoryBot.create(:comment) }
+  let(:comment) { create(:comment) }
 
   it 'コメント、ポスト、ユーザーがある場合、有効であること' do
-    user = FactoryBot.create(:user)
-    post = FactoryBot.create(:post)
+    user = create(:user)
+    post = create(:post)
     comment = Comment.new(
       comment: 'コメント',
       post: post,
@@ -69,10 +69,10 @@ RSpec.describe Comment, type: :model do
 
   describe 'その他' do
     it 'コメントが新しい順に並んでいること' do
-      post = FactoryBot.create(:post)
-      FactoryBot.create(:comment, post: post, created_at: 2.days.ago)
-      most_recent_comment = FactoryBot.create(:comment, post: post, created_at: Time.zone.now)
-      FactoryBot.create(:comment, post: post, created_at: 5.minutes.ago)
+      post = create(:post)
+      create(:comment, post: post, created_at: 2.days.ago)
+      most_recent_comment = create(:comment, post: post, created_at: Time.zone.now)
+      create(:comment, post: post, created_at: 5.minutes.ago)
 
       expect(most_recent_comment).to eq post.comments.first
     end

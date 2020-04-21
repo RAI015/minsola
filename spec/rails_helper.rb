@@ -33,6 +33,11 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  # seeds_testファイルを読み込み
+  config.before(:suite) do
+    load Rails.root.join('db', 'seeds_test.rb')
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -76,5 +81,5 @@ RSpec.configure do |config|
 
   # リクエストスペックとシステムスペックでDeviseのテストヘルパーを使用する
   config.include RequestSpecHelper, type: :request
-  # config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Devise::Test::IntegrationHelpers, type: :system
 end

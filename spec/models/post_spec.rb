@@ -29,16 +29,16 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:post) { FactoryBot.create(:post) }
+  let(:post) { create(:post) }
 
   it '有効なファクトリを持つこと' do
     expect(post).to be_valid
   end
 
   it 'キャプション、画像、ユーザー、都道府県、市区町村、天気、体感、予想がある場合、有効であること' do
-    user = FactoryBot.create(:user)
-    prefecture = FactoryBot.create(:prefecture)
-    city = FactoryBot.create(:city)
+    user = create(:user)
+    prefecture = create(:prefecture)
+    city = create(:city)
     post = Post.new(
       caption: '今日は快晴です。',
       image: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/rspec_test.jpg')),
@@ -108,8 +108,8 @@ RSpec.describe Post, type: :model do
 
   describe 'メソッド' do
     it '投稿をいいね/いいね解除できること' do
-      alice = FactoryBot.create(:user)
-      bob = FactoryBot.create(:user, :with_posts, posts_count: 1)
+      alice = create(:user)
+      bob = create(:user, :with_posts, posts_count: 1)
       expect(bob.posts.first.liked_by?(alice)).to eq false
       alice.like(bob.posts.first)
       expect(bob.posts.first.liked_by?(alice)).to eq true
@@ -121,10 +121,10 @@ RSpec.describe Post, type: :model do
   describe '#search' do
     # 各テストの前にPostを作成
     before do
-      user = FactoryBot.create(:user)
-      prefecture = FactoryBot.create(:prefecture, name: '神奈川県')
-      @city = FactoryBot.create(:city, name: '横須賀市', prefecture: prefecture)
-      @post = FactoryBot.create(
+      user = create(:user)
+      prefecture = create(:prefecture, name: '神奈川県')
+      @city = create(:city, name: '横須賀市', prefecture: prefecture)
+      @post = create(
         :post,
         user: user,
         caption: '今日は快晴です。',
@@ -135,9 +135,9 @@ RSpec.describe Post, type: :model do
         expectation: '今と変化なさそう'
       )
 
-      other_prefecture = FactoryBot.create(:prefecture, name: '東京都')
-      @other_city = FactoryBot.create(:city, name: '渋谷区', prefecture: other_prefecture)
-      @other_post = FactoryBot.create(
+      other_prefecture = create(:prefecture, name: '東京都')
+      @other_city = create(:city, name: '渋谷区', prefecture: other_prefecture)
+      @other_post = create(
         :post,
         user: user,
         caption: '今日は曇りです。',
@@ -204,20 +204,20 @@ RSpec.describe Post, type: :model do
 
   describe 'その他' do
     it '記事が新しい順に並んでいること' do
-      FactoryBot.create(:post, created_at: 2.days.ago)
-      most_recent_post = FactoryBot.create(:post, created_at: Time.zone.now)
-      FactoryBot.create(:post, created_at: 5.minutes.ago)
+      create(:post, created_at: 2.days.ago)
+      most_recent_post = create(:post, created_at: Time.zone.now)
+      create(:post, created_at: 5.minutes.ago)
 
       expect(most_recent_post).to eq Post.first
     end
 
     it '記事を削除すると、関連するコメントも削除されること' do
-      post = FactoryBot.create(:post, :with_comments, comments_count: 1)
+      post = create(:post, :with_comments, comments_count: 1)
       expect { post.destroy }.to change { Comment.count }.by(-1)
     end
 
     it '記事を削除すると、関連するいいねも削除されること' do
-      post = FactoryBot.create(:post, :with_likes, likes_count: 1)
+      post = create(:post, :with_likes, likes_count: 1)
       expect { post.destroy }.to change { Post.count }.by(-1)
     end
   end
