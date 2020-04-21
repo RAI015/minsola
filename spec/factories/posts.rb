@@ -31,8 +31,8 @@ FactoryBot.define do
     caption { '今日は快晴です。' }
     image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/rspec_test.jpg')) }
     association :user
-    association :prefecture
-    association :city
+    prefecture_id { 1 }
+    city_id { 1 }
     weather { '快晴' }
     feeling { 'ちょうどいい' }
     expectation { '今と変化なさそう' }

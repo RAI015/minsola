@@ -1,7 +1,11 @@
 <div class="p-comment__item">
   <p><%= simple_format(comment.comment) %></p>
   <div class="p-comment__bottomLine">
-    <%= link_to image_tag(comment.user.avatar.to_s, class: 'user_avatar'), comment.user %>
+    <% if comment.user.avatar? %>
+      <%= link_to image_tag(comment.user.avatar.to_s, class: 'user_avatar', alt: 'avatar image'), comment.user %>
+    <% else %>
+      <%= link_to image_tag('no-avatar.png', class: 'user_avatar', alt: 'avatar image'), comment.user %>
+    <% end %>
     <span><%= link_to comment.user.name, comment.user %></span>
     <span><%= comment.created_at.to_s(:datetime_jp) %></span>
     <% if user_signed_in? && (current_user.id == comment.user.id || current_user.admin?) %>

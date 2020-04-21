@@ -21,32 +21,11 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
   end
 
-  describe 'header_link_item' do
-    xit 'pathが現在のページだった場合、class: activeを付けてaタグを返すこと' do
-      a = header_link_item('index', root_path)
-      binding.pry
-    end
-
-    xit 'pathが現在のページでなかった場合、class: activeを付けてaタグを返すこと' do
-
-    end
-  end
-
-  describe 'nav_link_add_active' do
-    xit 'pathが現在のページだった場合、class: activeを付けてaタグを返すこと' do
-
-    end
-
-    xit 'pathが現在のページでなかった場合、class: activeを付けてaタグを返すこと' do
-
-    end
-  end
-
   describe 'set_address' do
     it '都道府県と市区町村を渡すと、「都道府県 市区町村」を返すこと' do
-      prefecture = FactoryBot.create(:prefecture)
-      city = FactoryBot.create(:city)
-      expect(set_address(prefecture.name, city.name)).to eq "#{prefecture.name} #{city.name}"
+      prefecture = '東京都'
+      city = '渋谷区'
+      expect(set_address(prefecture, city)).to eq '東京都' + ' ' + '渋谷区'
     end
   end
 end
