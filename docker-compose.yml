@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "3305:3306"
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app_name
+      - ~/.ssh:/root/.ssh
+  nginx:
+    build:
+      context: ./containers/nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web
+    volumes:
+      - public-data:/minsola/public
+      - tmp-data:/minsola/tmp
+volumes:
+  mysql_data:
+  public-data:
+  tmp-data:
