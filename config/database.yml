@@ -20,14 +20,14 @@ default: &default
 
 development:
   <<: *default
-  database: min_sola_db #min_sola_development
+  database: minsola_db #minsola_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: min_sola_test
+  database: minsola_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: min_sola_production
-  username: min_sola
-  password: <%= ENV['min_sola_DATABASE_PASSWORD'] %>
+  database: minsola_production
+  username: minsola
+  password: <%= ENV['minsola_DATABASE_PASSWORD'] %>
