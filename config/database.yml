@@ -49,16 +49,8 @@ test:
 #
 production:
   <<: *default
-  database: minsola_production
-  username: root
-  password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>
+  host: <%= Rails.application.credentials.rds[:host] %>
+  database: <%= Rails.application.credentials.rds[:database] %>
+  username: <%= Rails.application.credentials.rds[:username] %>
+  password: <%= Rails.application.credentials.rds[:password] %>
   port: 3306
-
-# production:
-#   <<: *default
-#   adapter: mysql2
-#   database: minsola_production
-#   username: root
-#   password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>
-#   host: minsola-mysql.cm7qty7gruhb.ap-northeast-1.rds.amazonaws.com
-#   port: 3306
