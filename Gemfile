@@ -39,7 +39,6 @@ group :development, :test do
 
   # ----- 以下追加 -----
   gem 'factory_bot_rails', '~> 4.10.0'
-  gem 'faker', '~> 2.8'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 4.0.0.beta'
 end
@@ -81,6 +80,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'faker', '~> 2.8'
 gem 'fog-aws'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'jquery-rails'

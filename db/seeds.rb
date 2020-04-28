@@ -132,6 +132,6 @@ admin = User.create!(name: 'Admin User',
                      confirmation_sent_at: Time.zone.now,
                      admin: true)
 
-admin.avatar = open("#{Rails.root}/db/fixtures/avatar/Admin.png")
+admin.avatar = open("#{Rails.root}/db/fixtures/avatar/admin.png")
 admin.profile = 'このアカウントは管理者アカウントです。'
 admin.save

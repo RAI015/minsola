@@ -5,25 +5,24 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: root
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
-    ports:
-      - "3305:3306"
   web:
     build:
       context: .
       dockerfile: Dockerfile
-    # command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     tty: true
     stdin_open: true
     depends_on:
       - db
     ports:
       - "3000:3000"
+    environment:
+      RAILS_ENV: development #production
     volumes:
       - .:/app_name
       - ~/.ssh:/root/.ssh
+      - log_data:/minsola/log
   nginx:
     build:
       context: ./containers/nginx
@@ -32,9 +31,10 @@ services:
     depends_on:
       - web
     volumes:
-      - public-data:/minsola/public
-      - tmp-data:/minsola/tmp
+      - public_data:/minsola/public
+      - tmp_data:/minsola/tmp
 volumes:
   mysql_data:
-  public-data:
-  tmp-data:
+  public_data:
+  tmp_data:
+  log_data:
