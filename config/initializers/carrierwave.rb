@@ -9,5 +9,9 @@ if Rails.env.production?
       aws_secret_access_key: Rails.application.credentials.aws[:secret_access_key]
     }
     config.fog_directory = Rails.application.credentials.aws[:s3_bucket]
+    config.asset_host = Rails.application.credentials.aws[:fog_asset_host]
+
+    config.cache_storage = :fog
+    config.cache_dir = 'tmp/image-cache'
   end
 end
