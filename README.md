@@ -1,14 +1,14 @@
 # Minsola
 今の空の写真を投稿し、天気の様子を共有するアプリです。<br>
 
-<br>
-<img width="1680" src="https://user-images.githubusercontent.com/62027190/80569058-134d0000-8a33-11ea-94cc-6f1869072ce8.png">
+
+<img style="width: 1680px; margin-top: 10px;" src="https://user-images.githubusercontent.com/62027190/80569058-134d0000-8a33-11ea-94cc-6f1869072ce8.png">
 
 ## URL
 https://www.minsola.xyz/ <br>
 非ログイン状態の場合は閲覧、検索のみ可能です。ログインすると投稿やコメントが可能になります。<br>
 ログイン画面の「かんたんログイン」をクリックすると、メールアドレスとパスワードを入力せずにログインできます。<br>
-メールアドレス"admin@example.com"、パスワード"12345678"で【管理者】としてログインできます。<br>
+メールアドレス"`admin@example.com`"、パスワード"12345678"で【管理者】としてログインできます。<br>
 管理者は、他の一般ユーザーのアカウントや投稿、コメントを削除できる権限を持ちます。<br>
 本ポートフォリオは、タブレット・スマートフォンからでもご覧いただけます。
 
