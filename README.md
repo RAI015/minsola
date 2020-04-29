@@ -1,19 +1,19 @@
-# Minsola
+# MinSola
 今の空の写真を投稿し、天気の様子を共有するアプリです。<br>
 
-
-<img style="width: 1680px; margin-top: 10px;" src="https://user-images.githubusercontent.com/62027190/80569058-134d0000-8a33-11ea-94cc-6f1869072ce8.png">
+<img src="https://user-images.githubusercontent.com/62027190/80569058-134d0000-8a33-11ea-94cc-6f1869072ce8.png">
 
 ## URL
 https://www.minsola.xyz/ <br>
 非ログイン状態の場合は閲覧、検索のみ可能です。ログインすると投稿やコメントが可能になります。<br>
 ログイン画面の「かんたんログイン」をクリックすると、メールアドレスとパスワードを入力せずにログインできます。<br>
-メールアドレス"`admin@example.com`"、パスワード"12345678"で【管理者】としてログインできます。<br>
+メールアドレス"`admin@example.com`"、パスワード"`12345678`"で【管理者】としてログインできます。<br>
 管理者は、他の一般ユーザーのアカウントや投稿、コメントを削除できる権限を持ちます。<br>
 本ポートフォリオは、タブレット・スマートフォンからでもご覧いただけます。
 
 ## 制作背景
-昔からぼーっと空を眺めることが好きで、ゆるめの天気予報アプリがあってもいいなと思い、作成しました。
+昔からぼーっと空を眺めることが好きだったので、空の画像を共有できて、<br>
+ゆるめの天気予報アプリがあったらいいなと思い、制作しました。
 
 ## 使用技術
 - Ruby 2.6.5, Rails 5.2.4.2
@@ -21,13 +21,13 @@ https://www.minsola.xyz/ <br>
 - Nginx, Puma
 - AWS（VPC, EC2, Route 53, ALB, ACM, S3, CloudFront）
 - Docker/docker-compose
-- CircleCI
+- CircleCI(予定)
 - Capistrano
 - RSpec
-- Sass, Bootstrap4, jQuery
+- Sass, Bootstrap, jQuery
 
 ## AWS構成図
-
+<img alt="AWS構成図を配置する">
 
 ## 機能一覧
 - ユーザー機能
@@ -59,5 +59,4 @@ https://www.minsola.xyz/ <br>
     - 都道府県SelectBoxに対する市区町村SelectBoxをAjaxで動的に制御
 
 ## ER図
-
-
+<img width="847" src="https://user-images.githubusercontent.com/62027190/80578677-cfaec200-8a43-11ea-8d2d-031c6953f1e2.png">
