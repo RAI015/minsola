@@ -96,12 +96,15 @@ CSV.foreach('db/csv/profile.csv') do |row|
   User.where(id: user_id).update(profile: profile)
 end
 
-# 記事のキャプション
+# 記事のキャプション、天気、体感、予想
 CSV.foreach('db/csv/caption.csv') do |row|
   post_id = row[0]
   caption = row[1]
+  weather = row[2]
+  feeling = row[3]
+  expectation = row[4]
 
-  Post.where(id: post_id).update(caption: caption)
+  Post.where(id: post_id).update(caption: caption, weather: weather, feeling: feeling, expectation: expectation)
 end
 
 # コメント
