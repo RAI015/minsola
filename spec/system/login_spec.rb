@@ -40,7 +40,6 @@ RSpec.describe 'Login', type: :system do
     end
   end
 
-
   describe 'ゲストユーザー' do
     let!(:guest) { create(:user, :guest) }
 
@@ -72,7 +71,6 @@ RSpec.describe 'Login', type: :system do
       expect(page).to have_content 'GuestUserさん'
     end
   end
-
 
   describe '管理者ユーザー' do
     let!(:admin) { create(:user, :admin) }
