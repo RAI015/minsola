@@ -1,3 +1,5 @@
+<% provide :title, '検索' %>
+
 <div class="container mt-4 search-form">
   <%= form_with(scope: :post, url: search_posts_path, method: :get, local: true) do |f| %>
   <div class="row">
