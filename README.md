@@ -62,4 +62,4 @@ https://www.minsola.xyz/ <br>
 <img width="847" src="https://user-images.githubusercontent.com/62027190/80578677-cfaec200-8a43-11ea-8d2d-031c6953f1e2.png">
 
 ## 参考アプリケーション
-<a href="http://weathernews.jp/s/report/read/index.html" target="_blank" rel="noopener">ウェザーリポートCh. - ウェザーニュース</a>
+[ウェザーリポートCh. - ウェザーニュース](http://weathernews.jp/s/report/read/index.html)
