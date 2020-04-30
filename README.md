@@ -28,7 +28,7 @@ https://www.minsola.xyz/ <br>
 - Sass, Bootstrap, jQuery
 
 ## AWS構成図
-<img alt="AWS構成図を配置する">
+![AWS構成図](https://user-images.githubusercontent.com/62027190/80701896-1c190100-8b1b-11ea-8427-2561bc0ff1e5.png)
 
 ## 機能一覧
 - ユーザー機能
