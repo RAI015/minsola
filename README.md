@@ -1,12 +1,11 @@
 # MinSola
-今の空の写真を投稿し、天気の様子を共有するアプリです。<br>
+今の空の写真を投稿し、天気の様子を報告・共有できるアプリです。<br>
 開発環境にDocker、インフラにAWSを使用しています。
 
 <img src="https://user-images.githubusercontent.com/62027190/80569058-134d0000-8a33-11ea-94cc-6f1869072ce8.png">
 
 ## 制作背景
-昔からぼーっと空を眺めることが好きだったので、空の画像を共有できて<br>
-ゆるめの天気予報アプリがあったらいいなと思い、制作しました。
+昔からぼーっと空を眺めることが好きだったので、空の画像を共有できてついでにゆるめの天気予報コミュニティになれるアプリがあったらいいなと思い、制作しました。
 
 ## URL
 https://www.minsola.xyz/ <br>
@@ -61,3 +60,6 @@ https://www.minsola.xyz/ <br>
 
 ## ER図
 <img width="847" src="https://user-images.githubusercontent.com/62027190/80578677-cfaec200-8a43-11ea-8d2d-031c6953f1e2.png">
+
+## 参考アプリケーション
+[ウェザーリポートCh. - ウェザーニュース](http://weathernews.jp/s/report/read/index.html)
