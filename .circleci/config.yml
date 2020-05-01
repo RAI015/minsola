@@ -54,13 +54,28 @@ jobs:
       - run: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run: bundle exec rake db:create db:schema:load --trace
 
-      - run: bundle exec rubocop
-      - run: bundle exec rspec
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+      - run:
+        name: Run RuboCop
+        command: bundle exec rubocop
+
+      - run:
+        name: Run RSpec
+        command: |
+          mkdir /tmp/test-results
+          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+            circleci tests split --split-by=timings)"
+          bundle exec rspec \
+            --format progress \
+            --format RspecJunitFormatter \
+            --out /tmp/test-results/rspec.xml \
+            --format progress \
+            $TEST_FILES
+
+    - store_test_results:
+        path: /tmp/test-results
+    - store_artifacts:
+        path: /tmp/test-results
+        destination: test-results
 
 workflows:
   version: 2.1
