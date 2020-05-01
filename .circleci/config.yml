@@ -54,8 +54,6 @@ jobs:
       - run: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run: bundle exec rake db:create db:schema:load --trace
 
-      # - run: bundle exec bin/webpack
-
       - run: bundle exec rubocop
       - run: bundle exec rspec
       - store_test_results:
