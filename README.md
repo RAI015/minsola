@@ -27,7 +27,7 @@ https://www.minsola.xyz/ <br>
 - Sass, Bootstrap, jQuery
 
 ## AWS構成図
-![AWS構成図](https://user-images.githubusercontent.com/62027190/80701896-1c190100-8b1b-11ea-8427-2561bc0ff1e5.png)
+![AWS構成図](https://user-images.githubusercontent.com/62027190/80856250-31a93a80-8c83-11ea-9e11-6b2e7f6f7ba2.png)
 
 ## 機能一覧
 - ユーザー機能
@@ -57,9 +57,8 @@ https://www.minsola.xyz/ <br>
 - その他
   - SelectBoxの中身を動的に変更する機能
     - 都道府県SelectBoxに対する市区町村SelectBoxをAjaxで動的に制御
-
 ## ER図
-<img width="847" src="https://user-images.githubusercontent.com/62027190/80578677-cfaec200-8a43-11ea-8d2d-031c6953f1e2.png">
+![ER図](https://user-images.githubusercontent.com/62027190/80856252-3372fe00-8c83-11ea-8165-75f6cd0f37c7.png)
 
 ## 参考アプリケーション
 [ウェザーリポートCh. - ウェザーニュース](http://weathernews.jp/s/report/read/index.html)
