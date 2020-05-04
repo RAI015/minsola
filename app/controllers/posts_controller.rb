@@ -16,10 +16,10 @@ class PostsController < ApplicationController
   end
 
   def feed
-    if user_signed_in?
-      @feed_posts = current_user.feed.page(params[:page]).per(12)
-      @feed_posts = @feed_posts.includes(:user, :prefecture, :city)
-    end
+    return unless user_signed_in?
+
+    @feed_posts = current_user.feed.page(params[:page]).per(PER)
+    @feed_posts = @feed_posts.includes(:user, :prefecture, :city)
   end
 
   def search
