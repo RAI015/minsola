@@ -1,0 +1,7 @@
+<% provide :title, 'フィード' %>
+
+<div class="container pt-4">
+  <%= render 'index_nav' %>
+
+  <%= render 'index_feed', posts: @feed_posts %>
+</div>

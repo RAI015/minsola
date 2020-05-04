@@ -19,7 +19,7 @@ RSpec.describe 'Posts', type: :system do
     fill_in 'メールアドレス', with: 'test@example.com'
     fill_in 'パスワード', with: '12345678'
     click_button 'ログイン'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq feed_posts_path
 
     # 新規投稿する
     find('.new-post-btn--pc').click
@@ -42,7 +42,7 @@ RSpec.describe 'Posts', type: :system do
       expect(post.weather).to eq '晴れ'
       expect(post.feeling).to eq 'ちょうどいい'
       expect(post.expectation).to eq '変化なさそう'
-      expect(current_path).to eq root_path
+      expect(current_path).to eq feed_posts_path
       expect(page).to have_link 'a', href: "/posts/#{post.id}"
     end
 
@@ -68,9 +68,85 @@ RSpec.describe 'Posts', type: :system do
     end
     sleep 1
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq feed_posts_path
     expect(page).to have_content "「#{set_address(post.prefecture.name, post.city.name)}」のレポートが削除されました"
     expect(Post.where(id: post.id)).to be_empty
     expect(page).to_not have_link 'a', href: "/posts/#{post.id}"
+  end
+
+  describe 'フィード関係' do
+    let!(:alice) { create(:user, name: 'alice') }
+    let!(:bob) { create(:user, name: 'bob') }
+    let!(:carol) { create(:user, name: 'carol') }
+
+    let!(:alice_post) { create(:post, user: alice) }
+    let!(:bob_post) { create(:post, user: bob) }
+    let!(:carol_post) { create(:post, user: carol) }
+
+    before 'aliceでログインする' do
+      visit root_path
+
+      click_link 'ログイン'
+      expect(current_path).to eq login_path
+      expect(page).to have_content '次回から自動的にログイン'
+
+      fill_in 'メールアドレス', with: alice.email
+      fill_in 'パスワード', with: alice.password
+      click_button 'ログイン'
+      expect(current_path).to eq feed_posts_path
+    end
+
+    it 'フィードに自身の投稿が表示されるか' do
+      click_link 'フィード'
+      within(:css, '.post-cards') do
+        expect(page).to have_link 'a', href: "/posts/#{alice_post.id}"
+        expect(page).to_not have_link 'a', href: "/posts/#{bob_post.id}"
+        expect(page).to_not have_link 'a', href: "/posts/#{carol_post.id}"
+
+        expect(page).to have_link 'alice'
+        expect(page).to_not have_link 'bob'
+        expect(page).to_not have_link 'carol'
+      end
+    end
+
+    it '他のユーザーをフォローし、フィードに表示されるか' do
+      alice.follow(bob)
+      click_link 'フィード'
+      within(:css, '.post-cards') do
+        expect(page).to have_link 'a', href: "/posts/#{alice_post.id}"
+        expect(page).to have_link 'a', href: "/posts/#{bob_post.id}"
+        expect(page).to_not have_link 'a', href: "/posts/#{carol_post.id}"
+
+        expect(page).to have_link 'alice'
+        expect(page).to have_link 'bob'
+        expect(page).to_not have_link 'carol'
+      end
+    end
+
+    it '他のユーザーをアンフォローし、フィードから消えるか' do
+      alice.follow(bob)
+      click_link 'フィード'
+      within(:css, '.post-cards') do
+        expect(page).to have_link 'a', href: "/posts/#{alice_post.id}"
+        expect(page).to have_link 'a', href: "/posts/#{bob_post.id}"
+        expect(page).to_not have_link 'a', href: "/posts/#{carol_post.id}"
+
+        expect(page).to have_link 'alice'
+        expect(page).to have_link 'bob'
+        expect(page).to_not have_link 'carol'
+      end
+
+      alice.unfollow(bob)
+      click_link 'フィード'
+      within(:css, '.post-cards') do
+        expect(page).to have_link 'a', href: "/posts/#{alice_post.id}"
+        expect(page).to_not have_link 'a', href: "/posts/#{bob_post.id}"
+        expect(page).to_not have_link 'a', href: "/posts/#{carol_post.id}"
+
+        expect(page).to have_link 'alice'
+        expect(page).to_not have_link 'bob'
+        expect(page).to_not have_link 'carol'
+      end
+    end
   end
 end

@@ -24,9 +24,10 @@ RSpec.describe 'Likes', type: :system do
     fill_in 'メールアドレス', with: 'alice@example.com'
     fill_in 'パスワード', with: 'password_alice'
     click_button 'ログイン'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq feed_posts_path
 
     # 記事詳細へ移動する
+    click_link '新着投稿'
     post = user.posts.first
     expect(page).to have_link 'a', href: "/posts/#{post.id}"
     click_link nil, href: "/posts/#{post.id}"

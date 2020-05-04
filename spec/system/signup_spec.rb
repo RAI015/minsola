@@ -34,7 +34,7 @@ RSpec.describe 'Signup', type: :system do
     fill_in '確認用パスワード', with: 'password_alice'
     expect do
       click_button '新規登録'
-      expect(current_path).to eq root_path
+      expect(current_path).to eq feed_posts_path
       expect(page).to have_content 'Aliceさん'
     end.to change(User, :count).by(1)
 

@@ -15,6 +15,13 @@ class PostsController < ApplicationController
     @popular_posts = @popular_posts.includes(:user, :prefecture, :city)
   end
 
+  def feed
+    if user_signed_in?
+      @feed_posts = current_user.feed.page(params[:page]).per(12)
+      @feed_posts = @feed_posts.includes(:user, :prefecture, :city)
+    end
+  end
+
   def search
     @search_params = post_search_params
     @search_posts = Post.search(@search_params).page(params[:page]).per(PER).includes(:user, :prefecture, :city)

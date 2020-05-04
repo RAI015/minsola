@@ -1,7 +1,7 @@
 <% if posts.any? %>
   <div class="row post-cards">
     <% posts.each do |post| %>
-      <div class="col-lg-4 col-md-6">
+      <div class="col-lg-4 col-md-12">
         <div class="card card-index">
           <div class="card-header" >
             <div class="post-user">
@@ -18,6 +18,13 @@
             </div>
           </div>
           <%= link_to image_tag(post.image.to_s, class: 'weather_image_index', alt: 'Weather image'), post %>
+
+          <div class="card-footer">
+            <div>
+              <span><%= "コメント#{post.comments.count}件" %></span>
+              <span><%= "いいね！#{post.likes.count}件" %></span>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
@@ -27,11 +34,4 @@
 
 <% end %>
 
-<% if user_signed_in? %>
-  <div class="d-none d-md-block">
-    <%= link_to icon("fas", "plus-circle") + ' 新規投稿', new_post_path, class: 'new-post-btn--pc' %>
-  </div>
-  <div class="d-block d-md-none">
-    <%= link_to icon("fas", "plus"), new_post_path, class: 'new-post-btn--sp' %>
-  </div>
-<% end %>
+<%= render 'index_new_post_btn' %>

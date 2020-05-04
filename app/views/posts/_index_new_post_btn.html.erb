@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+  <div class="d-none d-md-block">
+    <%= link_to icon("fas", "plus-circle") + ' 新規投稿', new_post_path, class: 'new-post-btn--pc' %>
+  </div>
+  <div class="d-block d-md-none">
+    <%= link_to icon("fas", "plus"), new_post_path, class: 'new-post-btn--sp' %>
+  </div>
+<% end %>

@@ -1,0 +1,50 @@
+<% if user_signed_in? %>
+  <% if posts.any? %>
+    <div class="row post-cards">
+      <% posts.each do |post| %>
+        <div class="col-md-8 mx-auto card-index">
+          <div class="card">
+            <div class="card-header" >
+              <div class="post-user">
+                <% if post.user.avatar? %>
+                  <%= link_to image_tag(post.user.avatar.to_s, class: 'user_avatar', alt: 'avatar image'), post.user, class: 'mr-2' %>
+                <% else %>
+                  <%= link_to image_tag('no-avatar.png', class: 'user_avatar', alt: 'avatar image'), post.user, class: 'mr-2' %>
+                <% end %>
+                <%= link_to post.user.name, post.user %>
+              </div>
+              <div class="post-info">
+                <small><%= set_address(post.prefecture.name, post.city.name) %></small><br>
+                <small><%= post.created_at.to_s(:datetime_jp) %></small>
+              </div>
+            </div>
+            <%= link_to image_tag(post.image.to_s, class: 'weather_image_index', alt: 'Weather image'), post %>
+
+            <div class="card-footer">
+              <span><%= simple_format(post.caption) %></span>
+              <div>
+                <span><%= "コメント#{post.comments.count}件" %></span>
+                <span><%= "いいね！#{post.likes.count}件" %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= paginate posts %>
+
+  <% else %>
+    <div class="no-contents d-flex flex-column align-items-center justify-content-center mx-auto">
+      <div class="no-contents-title font-weight-bold">投稿がありません</div>
+      <div class="no-contents-explanation text-center">あなた自身の投稿や、あなたがフォローしたユーザーの投稿がここに表示されます。</div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="no-contents d-flex flex-column align-items-center justify-content-center mx-auto">
+    <div class="no-contents-title font-weight-bold">ログインしてください</div>
+    <div class="no-contents-explanation text-center">あなた自身の投稿や、あなたがフォローしたユーザーの投稿がここに表示されます。</div>
+  </div>
+<% end %>
+
+<%= render 'index_new_post_btn' %>
