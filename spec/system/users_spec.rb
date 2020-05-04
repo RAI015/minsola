@@ -26,7 +26,7 @@ RSpec.describe 'Users', type: :system do
     fill_in 'メールアドレス', with: 'test@example.com'
     fill_in 'パスワード', with: '12345678'
     click_button 'ログイン'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq feed_posts_path
 
     click_link 'TestUserさん'
     click_link 'マイページ'
@@ -65,7 +65,7 @@ RSpec.describe 'Users', type: :system do
     fill_in 'メールアドレス', with: 'admin@example.com'
     fill_in 'パスワード', with: '12345678'
     click_button 'ログイン'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq feed_posts_path
     expect(page).to have_content 'AdminUserさん'
     expect(page).to have_content 'すべてのユーザー'
 

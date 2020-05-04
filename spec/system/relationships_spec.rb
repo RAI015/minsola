@@ -28,9 +28,10 @@ RSpec.describe 'Relationships', type: :system do
     fill_in 'メールアドレス', with: 'alice@example.com'
     fill_in 'パスワード', with: 'password_alice'
     click_button 'ログイン'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq feed_posts_path
 
     # Bobのページへ移動する
+    click_link '新着投稿'
     expect(page).to have_link 'a', href: "/posts/#{bob_post.id}"
     click_link 'Bob'
     expect(current_path).to eq "/users/#{bob.id}"

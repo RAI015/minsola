@@ -20,9 +20,10 @@ RSpec.describe 'Comments', type: :system do
     fill_in 'メールアドレス', with: 'test@example.com'
     fill_in 'パスワード', with: '12345678'
     click_button 'ログイン'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq feed_posts_path
 
     # 記事詳細へ移動する
+    click_link '新着投稿'
     expect(page).to have_link 'a', href: "/posts/#{post.id}"
     click_link nil, href: "/posts/#{post.id}"
     expect(current_path).to eq "/posts/#{post.id}"

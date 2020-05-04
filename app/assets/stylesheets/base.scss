@@ -144,5 +144,51 @@ footer {
 
 nav.nav-pills .nav-link {
   color: #007bff;
-  border-radius: 0.45rem;
+  border-radius: 0;
+}
+nav.nav-pills {
+  border: solid 1px cornflowerblue;
+  border-radius: 0.5rem;
+  &.nav-login {
+    .nav-link {
+      &:first-child {
+        border-top-left-radius: 0.45rem;
+        border-bottom-left-radius: 0.45rem;
+      }
+      &:nth-child(2) {
+        border-left: solid 0.5px;
+        border-right: solid 0.5px;
+      }
+      &:last-child {
+        border-top-right-radius: 0.45rem;
+        border-bottom-right-radius: 0.45rem;
+      }
+    }
+  }
+  &.nav-notlogin {
+    .nav-link {
+      &:first-child {
+        border-top-left-radius: 0.45rem;
+        border-bottom-left-radius: 0.45rem;
+      }
+      &:last-child {
+        border-top-right-radius: 0.45rem;
+        border-bottom-right-radius: 0.45rem;
+      }
+    }
+  }
+}
+
+.no-contents {
+  color: rgba(0, 0, 0, 0.4);
+  height: 320px;
+  width: 100%;
+  .no-contents-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+  }
+  .no-contents-explanation {
+    max-width: 440px;
+    padding: 0 30px;
+  }
 }

@@ -169,6 +169,27 @@ RSpec.describe User, type: :model do
       bob.unfollow(alice)
       expect(alice.followed_by?(bob)).to eq false
     end
+
+    it 'フィードが正しい投稿のコレクションを保持していること' do
+      alice = create(:user, :with_posts, posts_count: 2)
+      bob = create(:user, :with_posts, posts_count: 2)
+      carol = create(:user, :with_posts, posts_count: 2)
+
+      alice.follow(bob)
+
+      # フォローしているユーザーの投稿を確認
+      bob.posts.each do |post_following|
+        expect(alice.feed).to include(post_following)
+      end
+      # 自分自身の投稿を確認
+      alice.posts.each do |post_self|
+        expect(alice.feed).to include(post_self)
+      end
+      # フォローしていないユーザーの投稿を確認
+      carol.posts.each do |post_unfollowed|
+        expect(alice.feed).to_not include(post_unfollowed)
+      end
+    end
   end
 
   describe 'その他' do

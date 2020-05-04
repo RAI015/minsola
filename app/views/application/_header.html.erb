@@ -12,8 +12,16 @@
           <%= header_link_item(icon('fas', 'users') + ' すべてのユーザー', users_path) %>
         </li>
       <% end %>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= header_link_item(icon('fas', 'rss') + ' フィード', feed_posts_path) %>
+        </li>
+      <% end %>
       <li class="nav-item">
-        <%= header_link_item(icon('fas', 'th') + ' 投稿一覧', root_path) %>
+        <%= header_link_item(icon('fas', 'th') + ' 新着投稿', posts_path) %>
+      </li>
+      <li class="nav-item">
+        <%= header_link_item(icon('fa', 'heart') + ' 人気投稿', popular_posts_path) %>
       </li>
       <li class="nav-item">
         <%= header_link_item(icon('fas', 'search') + ' 検索', search_posts_path) %>

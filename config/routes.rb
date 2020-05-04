@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  root 'posts#index'
+  root 'static_pages#home'
 
   resources :posts do
     collection do
       get :cities_select
       get :popular
+      get :feed
       get :search
     end
 
