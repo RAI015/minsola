@@ -48,6 +48,17 @@ users.each_with_index do |user, i|
   user.save
 end
 
+# 管理ユーザー作成
+User.create!(name: 'Admin User',
+             email: 'admin@example.com',
+             password: '12345678',
+             password_confirmation: '12345678',
+             confirmed_at: Time.zone.now,
+             confirmation_sent_at: Time.zone.now,
+             avatar: open("#{Rails.root}/db/fixtures/avatar/admin.png"),
+             profile: 'このアカウントは管理者アカウントです。',
+             admin: true)
+
 # Post作成
 i = 0
 
@@ -125,16 +136,3 @@ user_array.each_with_index do |user, index|
   following.each { |followed| user.follow(followed) }
   followers.each { |follower| follower.follow(user) }
 end
-
-# 管理ユーザー作成
-admin = User.create!(name: 'Admin User',
-                     email: 'admin@example.com',
-                     password: '12345678',
-                     password_confirmation: '12345678',
-                     confirmed_at: Time.zone.now,
-                     confirmation_sent_at: Time.zone.now,
-                     admin: true)
-
-admin.avatar = open("#{Rails.root}/db/fixtures/avatar/admin.png")
-admin.profile = 'このアカウントは管理者アカウントです。'
-admin.save
