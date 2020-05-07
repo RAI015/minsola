@@ -63,11 +63,11 @@ User.create!(name: 'Admin User',
 i = 0
 
 users.each do
-  1.upto(8) do |j|
+  1.upto(6) do |j|
     # Cityマスタからランダムに1件返す
     cities = City.where('id >= ?', rand(City.first.id..City.last.id)).first
 
-    j = ((i * 8) + j)
+    j = ((i * 6) + j)
     image = open("#{Rails.root}/db/fixtures/sola/sola-#{j}.jpg")
     caption = Faker::TvShows::BojackHorseman.quote
     weather = ApplicationHelper::WEATHERS.sample
@@ -91,7 +91,7 @@ users.each do
 end
 
 # お気に入りデータ作成
-users = User.order(:id).take(8)
+users = User.order(:id).take(6)
 posts = Post.order(:id).take(15)
 users.each do |user|
   posts.each do |post|
