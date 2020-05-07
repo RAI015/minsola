@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@6.7.0
+  aws-ecs: circleci/aws-ecs@1.1.0
 
 references:
   defaults: &defaults
@@ -79,9 +82,53 @@ jobs:
 
 workflows:
   version: 2.1
-  test_and_deploy:
+  test_code:
     jobs:
       - checkout_code
       - test:
           requires:
             - checkout_code
+  # Nginxのデプロイ
+  nginx-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          filters:
+            branches:
+              only: master
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: ./nginx/Dockerfile
+          repo: nginx
+          tag: "${CIRCLE_SHA1}"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'minsola-ecs-task' #ECSのタスク定義名
+          cluster-name: '${ECS_ARN}'  #ECSのクラスターのARN
+          service-name: 'minsola-ecs-service' #サービス名
+          container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
+  # Railsのデプロイ
+  rails-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          filters:
+            branches:
+              only: master
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: ./Dockerfile
+          repo: rails
+          tag: "${CIRCLE_SHA1}"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'minsola-ecs-task' #ECSのタスク定義名
+          cluster-name: '${ECS_ARN}' #ECSのクラスターのARN
+          service-name: 'minsola-ecs-service' #サービス名
+          container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
