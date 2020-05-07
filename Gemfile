@@ -76,7 +76,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # ----- 以下追加 -----
 gem 'bootstrap', '>= 4.3.1'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '1.2.2'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
@@ -85,6 +85,6 @@ gem 'fog-aws'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'jquery-rails'
 gem 'kaminari'
-gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '4.7.0'
 gem 'rails-i18n'
 gem 'rename'
