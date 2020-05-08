@@ -1,33 +1,32 @@
 # MinSola
-今の空の写真を投稿し、天気の様子を報告・共有できるアプリです。<br>
-開発環境にDocker、インフラにAWSを使用しています。
+今の空の写真を投稿し、天気の様子をゆるく報告・共有できるアプリです。<br>
+開発環境と本番環境にDocker、インフラにAWSの各種サービスを活用しています。<br>
+また、CircleCIを用いてCI/CDパイプラインを実現しています。
 
-<img src="https://user-images.githubusercontent.com/62027190/80569058-134d0000-8a33-11ea-94cc-6f1869072ce8.png">
+![MinSola画面](https://user-images.githubusercontent.com/62027190/81408814-e1e1dc00-9178-11ea-9304-83876c71af6e.png)
 
 ## 制作背景
-昔からぼーっと空を眺めることが好きだったので、空の画像を共有できてついでにゆるめの天気予報コミュニティになれるアプリがあったらいいなと思い、制作しました。
+昔からぼーっと空を眺めることが好きだったので、空の画像を共有できてゆるめの天気予報コミュニティになれるアプリがあったらいいなと思い、制作しました。
 
 ## URL
-https://www.minsola.xyz/ <br>
+https://www.minsola.work/ <br>
 非ログイン状態の場合は閲覧、検索のみ可能です。ログインすると投稿やコメントが可能になります。<br>
 ログイン画面の「かんたんログイン」をクリックすると、メールアドレスとパスワードを入力せずにログインできます。<br>
 メールアドレス"`admin@example.com`"、パスワード"`12345678`"で【管理者】としてログインできます。<br>
 管理者は、他の一般ユーザーのアカウントや投稿、コメントを削除できる権限を持ちます。<br>
-本ポートフォリオは、タブレット・スマートフォンからでもご覧いただけます。
 
 ## 使用技術
 - Ruby 2.6.5, Rails 5.2.4.2
 - MySQL 5.7.30
 - Nginx, Puma
-- AWS（VPC, EC2, Route 53, ALB, ACM, S3, CloudFront）
+- AWS（VPC, ECS, ECR, RDS, Route 53, ELB, ACM, S3, CloudFront）
 - Docker/docker-compose
-- CircleCI(予定)
-- Capistrano
+- CircleCI (CI/CDパイプラインを構築)
 - RSpec
 - Sass, Bootstrap, jQuery
 
 ## AWS構成図
-![AWS構成図](https://user-images.githubusercontent.com/62027190/80856250-31a93a80-8c83-11ea-9e11-6b2e7f6f7ba2.png)
+![AWS構成図](https://user-images.githubusercontent.com/62027190/81407724-d7bede00-9176-11ea-8daf-bc4426d9668b.png)
 
 ## 機能一覧
 - ユーザー機能
@@ -57,6 +56,7 @@ https://www.minsola.xyz/ <br>
 - その他
   - SelectBoxの中身を動的に変更する機能
     - 都道府県SelectBoxに対する市区町村SelectBoxをAjaxで動的に制御
+
 ## ER図
 ![ER図](https://user-images.githubusercontent.com/62027190/80856252-3372fe00-8c83-11ea-8165-75f6cd0f37c7.png)
 
