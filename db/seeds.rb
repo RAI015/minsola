@@ -42,7 +42,7 @@ User.create!(name: 'Guest User',
 end
 
 # ユーザーAvatar生成
-users = User.order(:created_at).take(9)
+users = User.order(:id).take(10)
 users.each_with_index do |user, i|
   user.avatar = open("#{Rails.root}/db/fixtures/avatar/avatar-#{i + 1}.jpg")
   user.save
@@ -61,13 +61,14 @@ User.create!(name: 'Admin User',
 
 # Post作成
 i = 0
+users = User.order(:id).take(7)
 
 users.each do
-  1.upto(7) do |j|
+  1.upto(8) do |j|
     # Cityマスタからランダムに1件返す
     cities = City.where('id >= ?', rand(City.first.id..City.last.id)).first
 
-    j = ((i * 7) + j)
+    j = ((i * 8) + j)
     image = open("#{Rails.root}/db/fixtures/sola/sola-#{j}.jpg")
     caption = Faker::TvShows::BojackHorseman.quote
     weather = ApplicationHelper::WEATHERS.sample
