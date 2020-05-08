@@ -1,10 +1,11 @@
 <% provide :title, '新規ユーザー登録' %>
 
+<%= render "devise/shared/notice_alert" %>
+<%= render "devise/shared/error_messages", resource: resource %>
+
 <div class="container user_form">
-  <%= render "devise/shared/notice_alert" %>
   <h2 class="form_title">新規ユーザー登録</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="form-group">
       <%= f.label :name, 'ユーザー名（１０文字以内）' %>

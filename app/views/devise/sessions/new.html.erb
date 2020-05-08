@@ -1,7 +1,8 @@
 <% provide :title, 'ログイン' %>
 
+<%= render "devise/shared/notice_alert" %>
+
 <div class="container user_form">
-  <%= render "devise/shared/notice_alert" %>
   <h2 class="form_title">ログイン</h2>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
