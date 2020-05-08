@@ -11,12 +11,14 @@
       <% if user_signed_in? %>
         <%= render partial: 'comments/form', locals: { comment: @comment } %>
       <% end %>
-      <% if @post.comments.any? %>
-        <div class="p-comment__list">
-          <div class="p-comment_listTitle">コメント</div>
+      <div class="p-comment__list">
+        <div class="p-comment__listTitle">コメント</div>
+        <% if @post.comments.any? %>
           <%= render @post.comments.includes(:user) %>
-        </div>
-      <% end %>
+        <% else %>
+          <div class="p-comment__nonitem">まだコメントがありません</div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
