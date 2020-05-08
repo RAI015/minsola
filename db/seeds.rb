@@ -64,11 +64,11 @@ i = 0
 users = User.order(:id).take(7)
 
 users.each do
-  1.upto(8) do |j|
-    # Cityマスタからランダムに1件返す
-    cities = City.where('id >= ?', rand(City.first.id..City.last.id)).first
+  # Cityマスタからランダムに1件返す
+  cities = City.where('id >= ?', rand(City.first.id..City.last.id)).first
 
-    j = ((i * 8) + j)
+  1.upto(7) do |j|
+    j = ((i * 7) + j)
     image = open("#{Rails.root}/db/fixtures/sola/sola-#{j}.jpg")
     caption = Faker::TvShows::BojackHorseman.quote
     weather = ApplicationHelper::WEATHERS.sample
