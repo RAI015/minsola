@@ -10,6 +10,6 @@ if Rails.env.production?
     }
     config.fog_directory = Rails.application.credentials.aws[:s3_bucket]
     # CloudFront用の設定
-    config.asset_host = 'https://images.minsola.xyz'
+    config.asset_host = 'https://images.minsola.work'
   end
 end
