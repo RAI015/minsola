@@ -5,6 +5,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   process resize_to_fill: [500, 500, 'Center']
 
+  # ファイルサイズを制限
+  def size_range
+    1..5.megabytes
+  end
+
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
     storage :fog
