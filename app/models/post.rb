@@ -39,7 +39,6 @@ class Post < ApplicationRecord
 
   validates :caption, presence: true, length: { maximum: 300 }
   validates :image, presence: true
-  validate :image_size
   validates :weather, presence: true
   validates :feeling, presence: true
   validates :expectation, presence: true
@@ -66,10 +65,4 @@ class Post < ApplicationRecord
   scope :city_id_is, ->(city_id) { where(city_id: city_id) if city_id.present? }
   # weatherが存在する場合、weatherで検索する
   scope :weather_is, ->(weather) { where(weather: weather) if weather.present? }
-
-  private
-
-  def image_size
-    errors.add(:image, 'ファイルサイズを5MB以下にしてください') if image.size > 5.megabytes
-  end
 end
