@@ -1,8 +1,8 @@
 <% if posts.any? %>
   <div class="row post-cards">
     <% posts.each do |post| %>
-      <div class="col-lg-4 col-md-12">
-        <div class="card card-index">
+      <div class="col-lg-4 col-md-12 card-index">
+        <div class="card">
           <div class="card-header" >
             <div class="post-user">
               <% if post.user.avatar? %>
@@ -31,6 +31,7 @@
   </div>
 
   <%= paginate posts %>
+  <%= render 'shared/infinitescroll' %>
 
 <% end %>
 
