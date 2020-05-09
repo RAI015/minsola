@@ -7,8 +7,8 @@
     <h2 class="text-center font-weight-bold mt-4 mb-3">すべてのユーザー</h2>
     <div class="row user-cards">
       <% @users.each do |user| %>
-        <div class="col-lg-4 col-md-6 col-sm-6">
-          <div class="user-card card card-index align-items-center">
+        <div class="col-lg-4 col-md-6 col-sm-6 card-index">
+          <div class="user-card card align-items-center">
             <% if user.avatar? %>
               <%= link_to image_tag(user.avatar.to_s, size: "150x150", class: "rounded-circle", alt: "avatar image"), user %>
             <% else %>
@@ -25,6 +25,7 @@
     </div>
 
     <%= paginate @users %>
+    <%= render 'shared/infinitescroll' %>
 
   </div>
 <% end %>

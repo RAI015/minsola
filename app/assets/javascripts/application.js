@@ -16,9 +16,10 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require infinite-scroll.pkgd.min.js
 //= require_tree .
 
 // Flashメッセージを時間経過で無くす
-$(function(){
+$(document).on("turbolinks:load", function() {
   setTimeout("$('.time-limit').fadeOut('slow')", 1500)
 })

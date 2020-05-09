@@ -39,7 +39,7 @@ https://www.minsola.work/ <br>
 - コメント関係
   - コメント表示、コメント投稿、コメント削除機能
 - ページネーション機能
-  - kaminariを使用
+  - (kaminari + Infinite Scroll)を使用
 - いいね機能
   - 登録したいいねの一覧表示、人気順表示機能
   - Ajaxを使用

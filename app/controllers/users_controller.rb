@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_target_user, only: %i[show edit update destroy]
 
   def index
-    @users = User.page(params[:page]).per(24)
+    @users = User.order(admin: :DESC, id: :ASC).page(params[:page]).per(PER * 2)
   end
 
   def show
