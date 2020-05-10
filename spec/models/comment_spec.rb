@@ -24,6 +24,10 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   let(:comment) { create(:comment) }
 
+  it '有効なファクトリを持つこと' do
+    expect(comment).to be_valid
+  end
+
   it 'コメント、ポスト、ユーザーがある場合、有効であること' do
     user = create(:user)
     post = create(:post)
