@@ -2,21 +2,21 @@ require 'rails_helper'
 
 RSpec.describe 'Likes', type: :system do
   let!(:user) do
-    FactoryBot.create(:user,
-                      :with_posts,
-                      posts_count: 1)
+    create(:user,
+           :with_posts,
+           posts_count: 1)
   end
   let!(:alice) do
-    FactoryBot.create(:user,
-                      name: 'Alice',
-                      email: 'alice@example.com',
-                      password: 'password_alice')
+    create(:user,
+           name: 'Alice',
+           email: 'alice@example.com',
+           password: 'password_alice')
   end
 
   it '既存の投稿にいいね/いいね解除する', js: true do
     visit root_path
 
-    # ログインする
+    # Aliceがログインする
     click_link 'ログイン'
     expect(current_path).to eq login_path
     expect(page).to have_content '次回から自動的にログイン'

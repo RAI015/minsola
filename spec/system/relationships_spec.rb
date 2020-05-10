@@ -20,7 +20,7 @@ RSpec.describe 'Relationships', type: :system do
   it 'ユーザーをフォロー/フォロー解除する', js: true do
     visit root_path
 
-    # ログインする
+    # Aliceがログインする
     click_link 'ログイン'
     expect(current_path).to eq login_path
     expect(page).to have_content '次回から自動的にログイン'
