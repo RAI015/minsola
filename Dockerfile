@@ -1,6 +1,6 @@
 FROM ruby:2.6.5-alpine
 
-ENV RUNTIME_PACKAGES="bash file git gcc g++ imagemagick libc-dev linux-headers libxml2-dev libxslt-dev make mysql-client mysql-dev nodejs perl tzdata vim yarn" \
+ENV RUNTIME_PACKAGES="bash file gcc g++ imagemagick libc-dev linux-headers libxml2-dev libxslt-dev make mysql-client mysql-dev nodejs tzdata vim yarn" \
     BUILD_PACKAGES="build-base curl-dev" \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo
@@ -16,8 +16,8 @@ RUN unzip NotoSansCJKjp-hinted.zip && \
     chmod 644 -R /usr/share/fonts/noto/ && \
     fc-cache -fv
 
-RUN mkdir /app_name
-ENV APP_ROOT /app_name
+RUN mkdir /minsola
+ENV APP_ROOT /minsola
 WORKDIR $APP_ROOT
 
 COPY ./Gemfile $APP_ROOT/Gemfile
