@@ -9,7 +9,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     command: bundle exec puma -C config/puma.rb
     tty: true
     stdin_open: true
