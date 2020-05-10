@@ -18,10 +18,10 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - .:/app_name
+      - .:/minsola
       - ~/.ssh:/root/.ssh
       - log_data:/minsola/log
-      - sockets:/app_name/tmp/sockets
+      - sockets:/minsola/tmp/sockets
   nginx:
     build:
       context: .
@@ -33,7 +33,7 @@ services:
     volumes:
       - public_data:/minsola/public
       - tmp_data:/minsola/tmp
-      - sockets:/app_name/tmp/sockets
+      - sockets:/minsola/tmp/sockets
 volumes:
   mysql_data:
   public_data:
