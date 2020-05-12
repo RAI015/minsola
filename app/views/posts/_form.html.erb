@@ -14,7 +14,7 @@
           <i class="fas fa-camera"><p class="help-block">※ 5MBまでの画像をアップロードできます</p></i>
         <% end %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-right">
         <%= f.label :caption, 'キャプション（３００文字以内）' %>
         <%= f.text_area :caption, class: 'form-control', rows: 12, placeholder: '説明を入力してください' %>
       </div>
@@ -36,7 +36,7 @@
         </table>
 
       </div>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-right'>
         <%= f.label :weather, '天気（今の天気は？）' %>
         <%= f.select :weather, options_for_select(@weathers, post[:weather]), { prompt: '選択してください' }, { class: 'form-control' } %>
       </div>
@@ -46,7 +46,7 @@
         <%= f.label :feeling, '体感（今の体感は？）' %>
         <%= f.select :feeling, options_for_select(@feelings, post[:feeling]), { prompt: '選択してください' }, { class: 'form-control' } %>
       </div>
-      <div class='col-md-6'>
+      <div class='col-md-6 col-right'>
         <%= f.label :expectation, '予想（数時間後は？）' %>
         <%= f.select :expectation, options_for_select(@expectations, post[:expectation]), { prompt: '選択してください' }, { class: 'form-control' } %>
       </div>

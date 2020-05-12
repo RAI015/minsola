@@ -50,7 +50,7 @@
       <%= f.submit '変更を保存する', class: 'btn btn-primary' %>
     </div>
     <% if current_user.guest? %>
-      <div style="color: red; margin-top: 20px; text-align: center;">ゲストユーザーはユーザー名とメールアドレスが<br>編集できません</div>
+      <div style="color: red; margin-top: 20px;">ゲストユーザーはユーザー名とメールアドレスが編集できません</div>
     <% end %>
   <% end %>
 </div>

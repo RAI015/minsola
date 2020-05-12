@@ -1,8 +1,11 @@
 .p-comment__formBox {
-  margin: 0 auto 30px auto;
+  margin: 20px auto;
   border: 5px solid #e8e8e8;
   padding: 25px;
   border-radius: 14px;
+  @include md {
+    margin: 0 auto 20px auto;
+  }
 }
 
 .p-comment__formTitle {

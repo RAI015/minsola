@@ -2,7 +2,7 @@
 
 <div class="container mt-5">
   <div class="row mx-auto" style="max-width: 700px;">
-    <div class="pr-5 col-sm-5">
+    <div class="pr-5 col-md-5">
       <% if @user.avatar? %>
         <%= image_tag(@user.avatar.to_s, size: '250x250', class: 'rounded-circle d-none d-md-inline', alt: 'avatar image') %>
         <%= image_tag(@user.avatar.to_s, size: '200x200', class: 'rounded-circle d-inline d-md-none', alt: 'avatar image') %>
@@ -11,7 +11,7 @@
         <%= image_tag('no-avatar.png', size: '200x200', class: 'rounded-circle d-inline d-md-none', alt: 'avatar image') %>
       <% end %>
     </div>
-    <div class="d-flex flex-column mt-3 col-sm-7">
+    <div class="d-flex flex-column mt-3 col-md-7">
       <div class="user-name font-weight-bold pb-2">
         <%= @user.name %>
       </div>
@@ -32,7 +32,7 @@
         <% end %>
       <% end %>
       </div>
-      <div class="user-profile" style="width: 400px; height: 140px; overflow: hidden;">
+      <div class="user-profile" style="max-width: 400px; max-height: 140px; overflow: hidden;">
         <%= simple_format(@user.profile) %>
       </div>
     </div>
@@ -41,30 +41,38 @@
   <ul class="nav nav-tabs justify-content-center mt-3">
     <li class="nav-item">
       <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">
-        <span>投稿</span>
-        <div class="status-value"><%= @user.posts.count.to_s(:delimited) %></div>
+        <div class="user-status">
+          <span class="status-name">投稿</span>
+          <div class="status-value"><%= @user.posts.count.to_s(:delimited) %></div>
+        </div>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="followings-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="true">
-        <span>フォロー</span>
-        <div class="status-value" id="followings_<%= @user.id %>">
-          <%= @user.followings.count.to_s(:delimited) %>
+        <div class="user-status">
+          <span class="status-name">フォロー</span>
+          <div class="status-value" id="followings_<%= @user.id %>">
+            <%= @user.followings.count.to_s(:delimited) %>
+          </div>
         </div>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="followers-tab" data-toggle="tab" href="#item3" role="tab" aria-controls="item3" aria-selected="true">
-        <span>フォロワー</span>
-        <div class="status-value" id="followers_<%= @user.id %>">
-          <%= @user.followers.count.to_s(:delimited) %>
+        <div class="user-status">
+          <span class="status-name">フォロワー</span>
+          <div class="status-value" id="followers_<%= @user.id %>">
+            <%= @user.followers.count.to_s(:delimited) %>
+          </div>
         </div>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="likes-tab" data-toggle="tab" href="#item4" role="tab" aria-controls="item4" aria-selected="true">
-        <span>いいね</span>
-        <div class="status-value"><%= @user.like_posts.count.to_s(:delimited) %></div>
+        <div class="user-status">
+          <span class="status-name">いいね</span>
+          <div class="status-value"><%= @user.like_posts.count.to_s(:delimited) %></div>
+        </div>
       </a>
     </li>
   </ul>
