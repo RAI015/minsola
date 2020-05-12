@@ -6,7 +6,7 @@ ENV RUNTIME_PACKAGES="bash file gcc g++ imagemagick libc-dev linux-headers libxm
     TZ=Asia/Tokyo
 
 # RSpec Systemテスト用
-RUN apk add -U chromium chromium-chromedriver
+RUN apk add -U --no-cache chromium chromium-chromedriver
 RUN mkdir /noto
 ADD https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip /noto
 WORKDIR /noto
