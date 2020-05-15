@@ -129,7 +129,7 @@ footer {
 .user-card {
   background-color: rgba(0,0,0,0.1);
   padding: 20px;
-  min-height: 300px;
+  min-height: 280px;
   .user-name {
     margin: 15px auto 10px auto;
     text-decoration: none;
@@ -203,8 +203,12 @@ nav.nav-pills {
 
 .no-contents {
   color: rgba(0, 0, 0, 0.4);
-  height: 320px;
+  font-size: 1.15rem;
   width: 100%;
+  margin-top: 80px;
+  @include sm {
+    height: 320px;
+  }
   .no-contents-title {
     margin-bottom: 0.5rem;
     font-size: 1.3rem;

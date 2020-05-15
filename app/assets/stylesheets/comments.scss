@@ -1,11 +1,8 @@
 .p-comment__formBox {
-  margin: 20px auto;
+  margin: 14px auto;
   border: 5px solid #e8e8e8;
   padding: 25px;
   border-radius: 14px;
-  @include md {
-    margin: 0 auto 20px auto;
-  }
 }
 
 .p-comment__formTitle {
@@ -29,7 +26,7 @@
 }
 
 .p-comment__nonitem {
-  padding: 18px;
+  padding: 40px;
   color: #999;
 }
 

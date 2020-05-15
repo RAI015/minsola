@@ -1,0 +1,43 @@
+<ul class="nav nav-tabs justify-content-center post-right">
+  <li class="nav-item">
+    <a class="nav-link active" id="comments-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">
+      <div class="user-status">
+        <span class="status-name">コメント</span>
+        <div class="status-value"><%= "#{post.comments.count.to_s(:delimited)} 件" %></div>
+      </div>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="likes-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="true">
+      <div class="user-status">
+        <span class="status-name">いいね</span>
+        <div class="status-value" id="likes_<%= post.id %>"><%= "#{post.likes.count.to_s(:delimited)} 件" %></div>
+      </div>
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="comments-tab">
+    <% if user_signed_in? %>
+      <%= render 'comments/form', comment: comment %>
+    <% end %>
+    <div class="p-comment__list">
+      <div class="p-comment__listTitle">コメント</div>
+      <% if post.comments.any? %>
+        <%= render post.comments.includes(:user) %>
+      <% else %>
+        <div class="p-comment__nonitem">まだコメントがありません</div>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="likes-tab">
+    <% if post.like_users.any? %>
+      <div id="show-likes">
+        <%= render 'show_like_users', objects: post.like_users %>
+      </div>
+    <% else %>
+      <div class="no-contents d-flex justify-content-center align-items-center">まだいいね！がありません</div>
+    <% end %>
+  </div>
+</div>
