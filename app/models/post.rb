@@ -34,6 +34,7 @@ class Post < ApplicationRecord
   belongs_to :city
   # お気に入り機能用中間テーブル
   has_many :likes, dependent: :destroy
+  has_many :like_users, through: :likes, source: :user
 
   default_scope -> { order(created_at: :DESC) }
 

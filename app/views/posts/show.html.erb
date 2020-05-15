@@ -8,17 +8,7 @@
       <%= render @post %>
     </div>
     <div class="col-md-6">
-      <% if user_signed_in? %>
-        <%= render partial: 'comments/form', locals: { comment: @comment } %>
-      <% end %>
-      <div class="p-comment__list">
-        <div class="p-comment__listTitle">コメント</div>
-        <% if @post.comments.any? %>
-          <%= render @post.comments.includes(:user) %>
-        <% else %>
-          <div class="p-comment__nonitem">まだコメントがありません</div>
-        <% end %>
-      </div>
+      <%= render partial: 'show_comments_likes', locals: { post: @post, comment: @comment } %>
     </div>
   </div>
 </div>
