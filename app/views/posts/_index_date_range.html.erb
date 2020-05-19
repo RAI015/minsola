@@ -1,0 +1,8 @@
+  <div class="date_range">
+    <span><b>日付範囲：</b></span>
+    <div class="d-block d-sm-none"></div>
+    <%= date_range_link_active('全期間', transition_path, 'all') %>
+    <%= date_range_link_active('3日間', transition_path, '3days') %>
+    <%= date_range_link_active('1週間', transition_path, 'week') %>
+    <%= date_range_link_active('1ヶ月', transition_path, 'month') %>
+  </div>

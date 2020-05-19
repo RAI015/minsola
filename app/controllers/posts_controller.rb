@@ -8,11 +8,13 @@ class PostsController < ApplicationController
   def index
     @posts = Post.page(params[:page]).per(PER)
     @posts = @posts.includes(:user, :prefecture, :city)
+    @posts = set_posts_date_range(@posts, params[:date_range])
   end
 
   def popular
     @popular_posts = Post.unscoped.joins(:likes).group(:post_id).order(Arel.sql('count(likes.user_id) desc')).page(params[:page]).per(PER)
     @popular_posts = @popular_posts.includes(:user, :prefecture, :city)
+    @popular_posts = set_posts_date_range(@popular_posts, params[:date_range])
   end
 
   def feed
@@ -107,5 +109,19 @@ class PostsController < ApplicationController
 
   def post_search_params
     params.fetch(:post, {}).permit(:caption, :prefecture_id, :city_id, :weather)
+  end
+
+  def set_posts_date_range(posts, date_range)
+    from = 1.years.ago.beginning_of_day
+    to = Time.zone.now.end_of_day
+    case date_range
+    when '3days'
+      from = 3.days.ago.beginning_of_day
+    when 'week'
+      from = 1.week.ago.beginning_of_day
+    when 'month'
+      from = 1.month.ago.beginning_of_day
+    end
+    posts.where(created_at: from..to)
   end
 end
