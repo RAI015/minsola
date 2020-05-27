@@ -3,13 +3,13 @@
 開発環境と本番環境にDocker、インフラにAWSの各種サービスを活用しています。<br>
 また、CircleCIを用いてCI/CDパイプラインを実現しています。
 
-![MinSola画面](https://user-images.githubusercontent.com/62027190/81408814-e1e1dc00-9178-11ea-9304-83876c71af6e.png)
+![minsola-preview](https://user-images.githubusercontent.com/62027190/83033724-6fc32f80-a072-11ea-8632-94be7d022781.jpg)
 
 ## 制作背景
 昔からぼーっと空を眺めることが好きだったので、空の画像を共有でき、ゆるめの天気予報コミュニティになれるアプリがあったらいいなと思い、制作しました。
 
 ## URL
-https://www.minsola.work/ <br>
+https://www.minsola.work <br>
 - 非ログイン状態の場合は閲覧、検索のみ可能です。ログインすると投稿やコメントが可能になります。<br>
 - ログイン画面の「かんたんログイン」をクリックすると、メールアドレスとパスワードを入力せずにログインできます。<br>
 - メールアドレス"`admin@example.com`"、パスワード"`12345678`"で【管理者】としてログインできます。<br>
@@ -20,14 +20,14 @@ https://www.minsola.work/ <br>
 - Ruby 2.6.5, Rails 5.2.4.2
 - MySQL 5.7.30
 - Nginx, Puma
-- AWS（VPC, ECS, ECR, RDS, Route 53, ELB, ACM, S3, CloudFront）
+- AWS（VPC, ECS, ECR, RDS, Route 53, ALB, ACM, S3, CloudFront）
 - Docker/docker-compose
 - CircleCI (CI/CDパイプラインを構築)
 - RSpec
 - Sass, Bootstrap, jQuery
 
 ## AWS構成図
-![AWS構成図](https://user-images.githubusercontent.com/62027190/81407724-d7bede00-9176-11ea-8daf-bc4426d9668b.png)
+![AWS構成図](https://user-images.githubusercontent.com/62027190/83034680-78683580-a073-11ea-9d67-bc1b9c7dd405.png)
 
 ## 機能一覧
 - ユーザー機能
