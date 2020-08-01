@@ -73,5 +73,14 @@ https://www.minsola.work <br>
 ## ER図
 ![ER図](https://user-images.githubusercontent.com/62027190/80856252-3372fe00-8c83-11ea-8165-75f6cd0f37c7.png)
 
+## Tips
+- VS Code Markdown(.mdファイル)をプレビューするショートカットキー
+  - Windows ```Ctrl+K V```
+  - Mac ```⌘K V```
+- CIサービスの自動ビルドをスキップする方法
+  - コミットメッセージに以下のいずれかのキーワードを記載する
+    - ```[ci skip]```
+    - ```[skip ci]```
+
 ## 参考アプリケーション
 [ウェザーリポートCh. - ウェザーニュース](http://weathernews.jp/s/report/read/index.html)
