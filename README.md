@@ -5,6 +5,18 @@
 
 ![minsola-preview](https://user-images.githubusercontent.com/62027190/83033724-6fc32f80-a072-11ea-8632-94be7d022781.jpg)
 
+## Getting Started
+```
+$ git clone https://github.com/RAI015/minsola.git
+
+$ docker-compose -f docker-compose-dev.yml build
+
+$ docker-compose -f docker-compose-dev.yml exec web bin/rails db:migrate
+$ docker-compose -f docker-compose-dev.yml exec web bin/rails db:seed
+
+$ docker-compose -f docker-compose-dev.yml up -d
+```
+
 ## 制作背景
 昔からぼーっと空を眺めることが好きだったので、空の画像を共有でき、ゆるめの天気予報コミュニティになれるアプリがあったらいいなと思い、制作しました。
 
@@ -22,7 +34,7 @@ https://www.minsola.work <br>
 - Nginx, Puma
 - AWS（VPC, ECS, ECR, RDS, Route 53, ALB, ACM, S3, CloudFront）
 - Docker/docker-compose
-- CircleCI (CI/CDパイプラインを構築)
+- CircleCI (CI/CDパイプラインを構築)
 - RSpec
 - Sass, Bootstrap, jQuery
 
